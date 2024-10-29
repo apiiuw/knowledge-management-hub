@@ -83,28 +83,26 @@
                 </div>
             </form>
 
-            <!-- Daftar Item -->
-            <div class="flex flex-wrap justify-center lg:justify-start gap-3 my-8">
-                @foreach ($books as $book) {{-- Assuming you pass the books collection to your view --}}
-                    <div class="w-full lg:w-72 bg-white border border-gray-200 rounded-lg shadow-md shadow-black/30 dark:bg-gray-800 dark:border-gray-700">
-                        <a href="/detail-buku/{{ $book->id }}">
-                            <img id="pdf-cover-{{ $book->id }}" class="rounded-t-lg w-full aspect-square lg:w-72 lg:h-72 object-cover" src="{{ asset('assets/images/pages/beranda/List-Buku/contoh1.jpg') }}" alt="Cover for {{ $book->title }}" />
-                        </a>
-                        <div class="p-5">
-                            <a href="/detail-buku/{{ $book->id }}">
-                                <h5 class="mb-1 lg:mb-2 text-lg lg:text-xl font-bold tracking-tight text-gray-900 dark:text-white">{{ $book->title }}</h5>
-                            </a>
-                            <p class="mb-3 text-sm lg:text-base text-gray-700 dark:text-gray-400">{{ $book->description }}</p>
-                            <a href="/detail-buku/{{ $book->id }}" class="inline-flex items-center px-3 py-2 text-sm text-center text-white bg-blueJR rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                                Baca selengkapnya
-                                <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-                @endforeach
+<!-- Daftar Item -->
+<div class="flex flex-wrap justify-center lg:justify-start gap-3 my-8">
+    @foreach ($books as $book) {{-- Assuming you pass the books collection to your view --}}
+        <div class="w-full lg:w-72 bg-white border border-gray-200 rounded-lg shadow-md shadow-black/30 dark:bg-gray-800 dark:border-gray-700 flex flex-col">
+            <a href="/detail-buku/{{ $book->id }}">
+                <img id="pdf-cover-{{ $book->id }}" class="rounded-t-lg w-full aspect-square lg:w-72 lg:h-72 object-cover" src="{{ asset('assets/images/pages/beranda/List-Buku/contoh1.jpg') }}" alt="Cover for {{ $book->title }}" />
+            </a>
+            <div class="p-5 flex flex-col flex-grow">
+                <a href="/detail-buku/{{ $book->id }}">
+                    <h5 class="mb-1 lg:mb-2 text-lg lg:text-xl font-bold tracking-tight text-gray-900 dark:text-white">{{ $book->title }}</h5>
+                </a>
+                <p class="mb-3 text-sm lg:text-base text-gray-700 dark:text-gray-400 line-clamp-3  flex-grow">{{ $book->description }}</p>
+                <a href="/detail-buku/{{ $book->id }}" class="inline-flex items-center justify-center text-base text-white bg-blueJR rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 mt-auto px-2 py-1">
+                    Baca selengkapnya
+                </a>                             
             </div>
+        </div>
+    @endforeach
+</div>
+
 
             <!-- PDF.js -->
             <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
@@ -150,56 +148,54 @@
 
         </div>
 
-<!-- Sidebar -->
-<div class="hidden lg:block w-1/4 pl-4">
-    <div class="bg-blueJR p-4 rounded-lg shadow-md">
-        <h2 class="text-xl font-semibold text-white mb-4">Kategori</h2>
-        <ul class="space-y-4">
+        <!-- Sidebar -->
+        <div class="hidden lg:block w-1/4 pl-4">
+            <div class="bg-blueJR p-4 rounded-lg shadow-md">
+                <h2 class="text-xl font-semibold text-white mb-4">Kategori</h2>
+                <ul class="space-y-4">
 
-            <!-- Kategori Artikel dengan background putih -->
-            <li class="bg-white p-3 rounded-lg">
-                <h3 class="text-lg font-semibold text-blueJR">Artikel</h3>
-                <details class="ml-4 group">
-                    <summary class="text-lg font-semibold text-blueJR cursor-pointer hover:underline">Pilih Tahun</summary>
-                    <ul class="space-y-1 mt-2 ml-4 border-l-2 border-blueJR pl-2">
-                        <li><a href="#" class="text-blueJR text-base flex items-center hover:underline"><span class="material-icons mr-2">Artikel</span>tahun 2024</a></li>
-                        <li><a href="#" class="text-blueJR text-base flex items-center hover:underline"><span class="material-icons mr-2">Artikel</span>tahun 2023</a></li>
-                        <li><a href="#" class="text-blueJR text-base flex items-center hover:underline"><span class="material-icons mr-2">Artikel</span>tahun 2022</a></li>
-                        <li><a href="#" class="text-blueJR text-base flex items-center hover:underline"><span class="material-icons mr-2">Artikel</span>tahun 2021</a></li>
-                        <li><a href="#" class="text-blueJR text-base flex items-center hover:underline"><span class="material-icons mr-2">Artikel</span>tahun 2020</a></li>
-                        <li><a href="#" class="text-blueJR text-base flex items-center underline"><span class="material-icons mr-2">Seluruh Artikel</span></a></li>
-                    </ul>
-                </details>
-            </li>
+                    <!-- Kategori Artikel dengan background putih -->
+                    <li class="bg-white p-3 rounded-lg">
+                        <h3 class="text-lg font-semibold text-blueJR">Artikel</h3>
+                        <details class="ml-4 group">
+                            <summary class="text-lg font-semibold text-blueJR cursor-pointer hover:underline">Pilih Tahun</summary>
+                            <ul class="space-y-1 mt-2 ml-4 border-l-2 border-blueJR pl-2">
+                                <li><a href="#" class="text-blueJR text-base flex items-center hover:underline"><span class="material-icons mr-2">Artikel</span>tahun 2024</a></li>
+                                <li><a href="#" class="text-blueJR text-base flex items-center hover:underline"><span class="material-icons mr-2">Artikel</span>tahun 2023</a></li>
+                                <li><a href="#" class="text-blueJR text-base flex items-center hover:underline"><span class="material-icons mr-2">Artikel</span>tahun 2022</a></li>
+                                <li><a href="#" class="text-blueJR text-base flex items-center hover:underline"><span class="material-icons mr-2">Artikel</span>tahun 2021</a></li>
+                                <li><a href="#" class="text-blueJR text-base flex items-center hover:underline"><span class="material-icons mr-2">Artikel</span>tahun 2020</a></li>
+                                <li><a href="#" class="text-blueJR text-base flex items-center underline"><span class="material-icons mr-2">Seluruh Artikel</span></a></li>
+                            </ul>
+                        </details>
+                    </li>
 
-            <!-- Kategori Buku Elektronik (tetap dengan warna asli) -->
-            <li class="bg-white p-3 rounded-lg">
-                <h3 class="text-lg font-semibold text-blueJR">Buku Elektronik</h3>
-                <details class="ml-4 group">
-                    <summary class="text-lg font-semibold text-blueJR cursor-pointer hover:underline">Pilih Tahun</summary>
-                    <ul class="space-y-1 mt-2 ml-4 border-l-2 border-white pl-2">
-                        <li><a href="#" class="text-blueJR text-base flex items-center hover:underline"><span class="material-icons mr-2">Buku Elektronik</span>tahun 2024</a></li>
-                        <li><a href="#" class="text-blueJR text-base flex items-center hover:underline"><span class="material-icons mr-2">Buku Elektronik</span>tahun 2023</a></li>
-                        <li><a href="#" class="text-blueJR text-base flex items-center hover:underline"><span class="material-icons mr-2">Buku Elektronik</span>tahun 2022</a></li>
-                        <li><a href="#" class="text-blueJR text-base flex items-center hover:underline"><span class="material-icons mr-2">Buku Elektronik</span>tahun 2021</a></li>
-                        <li><a href="#" class="text-blueJR text-base flex items-center hover:underline"><span class="material-icons mr-2">Buku Elektronik</span>tahun 2020</a></li>
-                        <li><a href="#" class="text-blueJR text-base flex items-center underline"><span class="material-icons mr-2">Seluruh Buku Elektronik</span></a></li>
-                    </ul>
-                </details>
-            </li>
+                    <!-- Kategori Buku Elektronik (tetap dengan warna asli) -->
+                    <li class="bg-white p-3 rounded-lg">
+                        <h3 class="text-lg font-semibold text-blueJR">Buku Elektronik</h3>
+                        <details class="ml-4 group">
+                            <summary class="text-lg font-semibold text-blueJR cursor-pointer hover:underline">Pilih Tahun</summary>
+                            <ul class="space-y-1 mt-2 ml-4 border-l-2 border-white pl-2">
+                                <li><a href="#" class="text-blueJR text-base flex items-center hover:underline"><span class="material-icons mr-2">Buku Elektronik</span>tahun 2024</a></li>
+                                <li><a href="#" class="text-blueJR text-base flex items-center hover:underline"><span class="material-icons mr-2">Buku Elektronik</span>tahun 2023</a></li>
+                                <li><a href="#" class="text-blueJR text-base flex items-center hover:underline"><span class="material-icons mr-2">Buku Elektronik</span>tahun 2022</a></li>
+                                <li><a href="#" class="text-blueJR text-base flex items-center hover:underline"><span class="material-icons mr-2">Buku Elektronik</span>tahun 2021</a></li>
+                                <li><a href="#" class="text-blueJR text-base flex items-center hover:underline"><span class="material-icons mr-2">Buku Elektronik</span>tahun 2020</a></li>
+                                <li><a href="#" class="text-blueJR text-base flex items-center underline"><span class="material-icons mr-2">Seluruh Buku Elektronik</span></a></li>
+                            </ul>
+                        </details>
+                    </li>
 
-            <!-- Kategori Studi Kasus dengan background putih -->
-            <li class="bg-white p-3 rounded-lg">
-                <h3 class="text-lg font-semibold text-blueJR">Studi Kasus</h3>
-                <ul class="ml-4 space-y-1 mt-2 border-l-2 border-blueJR pl-2">
-                    <li><a href="#" class="text-blueJR text-base flex items-center underline"><span class="material-icons mr-2">Seluruh Studi Kasus</span></a></li>
+                    <!-- Kategori Studi Kasus dengan background putih -->
+                    <li class="bg-white p-3 rounded-lg">
+                        <h3 class="text-lg font-semibold text-blueJR">Studi Kasus</h3>
+                        <ul class="ml-4 space-y-1 mt-2 border-l-2 border-blueJR pl-2">
+                            <li><a href="#" class="text-blueJR text-base flex items-center underline"><span class="material-icons mr-2">Seluruh Studi Kasus</span></a></li>
+                        </ul>
+                    </li>
                 </ul>
-            </li>
-        </ul>
-    </div>
-</div>
-
-
+            </div>
+        </div>
 
     </div>
 </div>
