@@ -85,115 +85,69 @@
 
             <!-- Daftar Item -->
             <div class="flex flex-wrap justify-center lg:justify-start gap-3 my-8">
-                {{-- List 1 --}}
-                <div class="w-full lg:w-72 bg-white border border-gray-200 rounded-lg shadow-md shadow-black/30 dark:bg-gray-800 dark:border-gray-700">
-                    <a href="/detail-buku">
-                        <img class="rounded-t-lg w-full aspect-square lg:w-72 lg:h-72 object-cover" src="{{ asset('assets/images/pages/beranda/List-Buku/contoh1.jpg') }}" alt="" />
-                    </a>                
-                    <div class="p-5">
-                        <a href="/detail-buku">
-                            <h5 class="mb-1 lg:mb-2 text-lg lg:text-xl font-bold tracking-tight text-gray-900 dark:text-white">PENGANTAR BISNIS</h5>
+                @foreach ($books as $book) {{-- Assuming you pass the books collection to your view --}}
+                    <div class="w-full lg:w-72 bg-white border border-gray-200 rounded-lg shadow-md shadow-black/30 dark:bg-gray-800 dark:border-gray-700">
+                        <a href="/detail-buku/{{ $book->id }}">
+                            <img id="pdf-cover-{{ $book->id }}" class="rounded-t-lg w-full aspect-square lg:w-72 lg:h-72 object-cover" src="{{ asset('assets/images/pages/beranda/List-Buku/contoh1.jpg') }}" alt="Cover for {{ $book->title }}" />
                         </a>
-                        <p class="mb-3 text-sm lg:text-base text-gray-700 dark:text-gray-400">Buku ini memaparkan berbagai aspek esensial, mulai dari pengertian dan sejarah perkembangan bisnis hingga peluang dan tantangan yang dihadapi.</p>
-                        <a href="/detail-buku" class="inline-flex items-center px-3 py-2 text-sm text-center text-white bg-blueJR rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                            Baca selengkapnya
-                            <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
-                            </svg>
-                        </a>
+                        <div class="p-5">
+                            <a href="/detail-buku/{{ $book->id }}">
+                                <h5 class="mb-1 lg:mb-2 text-lg lg:text-xl font-bold tracking-tight text-gray-900 dark:text-white">{{ $book->title }}</h5>
+                            </a>
+                            <p class="mb-3 text-sm lg:text-base text-gray-700 dark:text-gray-400">{{ $book->description }}</p>
+                            <a href="/detail-buku/{{ $book->id }}" class="inline-flex items-center px-3 py-2 text-sm text-center text-white bg-blueJR rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                Baca selengkapnya
+                                <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+                                </svg>
+                            </a>
+                        </div>
                     </div>
-                </div>
-                {{-- List 2 --}}
-                <div class="w-full lg:w-72 bg-white border border-gray-200 rounded-lg shadow-md shadow-black/30 dark:bg-gray-800 dark:border-gray-700">
-                    <a href="/detail-buku">
-                        <img class="rounded-t-lg w-full aspect-square lg:w-72 lg:h-72 object-cover" src="{{ asset('assets/images/pages/beranda/List-Buku/contoh1.jpg') }}" alt="" />
-                    </a>                
-                    <div class="p-5">
-                        <a href="/detail-buku">
-                            <h5 class="mb-1 lg:mb-2 text-lg lg:text-xl font-bold tracking-tight text-gray-900 dark:text-white">PENGANTAR BISNIS</h5>
-                        </a>
-                        <p class="mb-3 text-sm lg:text-base text-gray-700 dark:text-gray-400">Buku ini memaparkan berbagai aspek esensial, mulai dari pengertian dan sejarah perkembangan bisnis hingga peluang dan tantangan yang dihadapi.</p>
-                        <a href="/detail-buku" class="inline-flex items-center px-3 py-2 text-sm text-center text-white bg-blueJR rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                            Baca selengkapnya
-                            <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-                {{-- List 3 --}}
-                <div class="w-full lg:w-72 bg-white border border-gray-200 rounded-lg shadow-md shadow-black/30 dark:bg-gray-800 dark:border-gray-700">
-                    <a href="/detail-buku">
-                        <img class="rounded-t-lg w-full aspect-square lg:w-72 lg:h-72 object-cover" src="{{ asset('assets/images/pages/beranda/List-Buku/contoh1.jpg') }}" alt="" />
-                    </a>                
-                    <div class="p-5">
-                        <a href="/detail-buku">
-                            <h5 class="mb-1 lg:mb-2 text-lg lg:text-xl font-bold tracking-tight text-gray-900 dark:text-white">PENGANTAR BISNIS</h5>
-                        </a>
-                        <p class="mb-3 text-sm lg:text-base text-gray-700 dark:text-gray-400">Buku ini memaparkan berbagai aspek esensial, mulai dari pengertian dan sejarah perkembangan bisnis hingga peluang dan tantangan yang dihadapi.</p>
-                        <a href="/detail-buku" class="inline-flex items-center px-3 py-2 text-sm text-center text-white bg-blueJR rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                            Baca selengkapnya
-                            <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-                {{-- List 4 --}}
-                <div class="w-full lg:w-72 bg-white border border-gray-200 rounded-lg shadow-md shadow-black/30 dark:bg-gray-800 dark:border-gray-700">
-                    <a href="/detail-buku">
-                        <img class="rounded-t-lg w-full aspect-square lg:w-72 lg:h-72 object-cover" src="{{ asset('assets/images/pages/beranda/List-Buku/contoh1.jpg') }}" alt="" />
-                    </a>                
-                    <div class="p-5">
-                        <a href="/detail-buku">
-                            <h5 class="mb-1 lg:mb-2 text-lg lg:text-xl font-bold tracking-tight text-gray-900 dark:text-white">PENGANTAR BISNIS</h5>
-                        </a>
-                        <p class="mb-3 text-sm lg:text-base text-gray-700 dark:text-gray-400">Buku ini memaparkan berbagai aspek esensial, mulai dari pengertian dan sejarah perkembangan bisnis hingga peluang dan tantangan yang dihadapi.</p>
-                        <a href="/detail-buku" class="inline-flex items-center px-3 py-2 text-sm text-center text-white bg-blueJR rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                            Baca selengkapnya
-                            <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-                {{-- List 5 --}}
-                <div class="w-full lg:w-72 bg-white border border-gray-200 rounded-lg shadow-md shadow-black/30 dark:bg-gray-800 dark:border-gray-700">
-                    <a href="/detail-buku">
-                        <img class="rounded-t-lg w-full aspect-square lg:w-72 lg:h-72 object-cover" src="{{ asset('assets/images/pages/beranda/List-Buku/contoh1.jpg') }}" alt="" />
-                    </a>                
-                    <div class="p-5">
-                        <a href="/detail-buku">
-                            <h5 class="mb-1 lg:mb-2 text-lg lg:text-xl font-bold tracking-tight text-gray-900 dark:text-white">PENGANTAR BISNIS</h5>
-                        </a>
-                        <p class="mb-3 text-sm lg:text-base text-gray-700 dark:text-gray-400">Buku ini memaparkan berbagai aspek esensial, mulai dari pengertian dan sejarah perkembangan bisnis hingga peluang dan tantangan yang dihadapi.</p>
-                        <a href="/detail-buku" class="inline-flex items-center px-3 py-2 text-sm text-center text-white bg-blueJR rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                            Baca selengkapnya
-                            <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-                {{-- List 6 --}}
-                <div class="w-full lg:w-72 bg-white border border-gray-200 rounded-lg shadow-md shadow-black/30 dark:bg-gray-800 dark:border-gray-700">
-                    <a href="/detail-buku">
-                        <img class="rounded-t-lg w-full aspect-square lg:w-72 lg:h-72 object-cover" src="{{ asset('assets/images/pages/beranda/List-Buku/contoh1.jpg') }}" alt="" />
-                    </a>                
-                    <div class="p-5">
-                        <a href="/detail-buku">
-                            <h5 class="mb-1 lg:mb-2 text-lg lg:text-xl font-bold tracking-tight text-gray-900 dark:text-white">PENGANTAR BISNIS</h5>
-                        </a>
-                        <p class="mb-3 text-sm lg:text-base text-gray-700 dark:text-gray-400">Buku ini memaparkan berbagai aspek esensial, mulai dari pengertian dan sejarah perkembangan bisnis hingga peluang dan tantangan yang dihadapi.</p>
-                        <a href="/detail-buku" class="inline-flex items-center px-3 py-2 text-sm text-center text-white bg-blueJR rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                            Baca selengkapnya
-                            <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
+                @endforeach
             </div>
+
+            <!-- PDF.js -->
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
+
+            <script>
+                @foreach ($books as $book) 
+                    const url{{ $book->id }} = '{{ asset($book->pdf_file) }}'; // Use the PDF file path from the book data
+                    let pdfDoc{{ $book->id }} = null;
+
+                    // Load PDF and render cover image for the book
+                    pdfjsLib.getDocument(url{{ $book->id }}).promise.then(doc => {
+                        pdfDoc{{ $book->id }} = doc;
+                        renderCover{{ $book->id }}();
+                    });
+
+                    // Function to render the cover image
+                    function renderCover{{ $book->id }}() {
+                        pdfDoc{{ $book->id }}.getPage(1).then(page => {
+                            const viewport = page.getViewport({ scale: 0.5 });
+                            const coverCanvas = document.createElement("canvas");
+                            const coverCtx = coverCanvas.getContext("2d");
+
+                            coverCanvas.height = viewport.height;
+                            coverCanvas.width = viewport.width;
+
+                            page.render({
+                                canvasContext: coverCtx,
+                                viewport: viewport
+                            }).promise.then(() => {
+                                const coverImage = coverCanvas.toDataURL("image/png");
+                                document.getElementById("pdf-cover-{{ $book->id }}").src = coverImage; // Update the cover image for the book
+                            });
+                        });
+                    }
+                @endforeach
+            </script>
+
+            <style>
+                #pdf-canvas {
+                    transition: opacity 0.3s ease-in-out;
+                }
+            </style>
+
         </div>
 
 <!-- Sidebar -->
