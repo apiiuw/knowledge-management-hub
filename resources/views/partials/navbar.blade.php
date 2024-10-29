@@ -36,7 +36,7 @@
                     <a href="/tentang-kami" class="block py-2 px-3 {{ $active === 'tentang-kami' ? 'text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700' : 'text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700' }}">TENTANG KAMI</a>
                 </li>
                 <li>
-                    <a href="/faq" class="block py-2 px-3 {{ $active === 'faq' ? 'text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700' : 'text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700' }}">FAQ</a>
+                    <a href="/forum-diskusi" class="block py-2 px-3 {{ $active === 'forum-diskusi' ? 'text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700' : 'text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700' }}">FORUM DISKUSI</a>
                 </li>
                 <li>
                     <a href="/kontak" class="block py-2 px-3 {{ $active === 'kontak' ? 'text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700' : 'text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700' }}">KONTAK</a>
