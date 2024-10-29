@@ -73,7 +73,7 @@
           </ul>
         </div>
       </div>
-    </div>
+  </div>
 
     {{-- Input Pertanyaan --}}
     <div class="mt-3 flex flex-col justify-center items-center font-jakartaSans">
@@ -96,5 +96,6 @@
     </div>
 
 </div>
+
 
 @endsection
