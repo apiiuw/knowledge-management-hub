@@ -1,13 +1,13 @@
 @extends('layouts.main')
 @section('container')
 
-<div class="bg-white w-full h-full pt-16 md:pt-28 px-10">
+<div class="bg-white w-full h-full pt-28 px-10">
 
   <div class="flex flex-col justify-center items-center">
     
     {{-- Head --}}
-    <h1 class="font-bold text-3xl text-blueJR font-jakartaSans mb-3">FORUM DISKUSI</h1>
-    <h1 class="text-center font-semibold text-xl text-white rounded-md font-jakartaSans mb-3 py-2 px-1 bg-blueJR">Forum Diskusi dirangkai agar user dapat mengekspresikan dan menanyakan suatu hal tentang website Knowledge Management Hub. Perkembangan website sangat bergantung kepada pertanyaan dari user yang menggunakan website Knowledge Management Hub.</h1>
+    <h1 class="font-bold text-2xl md:text-3xl text-blueJR font-jakartaSans mb-3">FORUM DISKUSI</h1>
+    <h1 class="text-center font-semibold text-lg md:text-xl text-white rounded-md font-jakartaSans mb-3 py-2 px-1 bg-blueJR">Forum Diskusi dirangkai agar user dapat mengekspresikan dan menanyakan suatu hal tentang website Knowledge Management Hub. Perkembangan website sangat bergantung kepada pertanyaan dari user yang menggunakan website Knowledge Management Hub.</h1>
 
     {{-- Search --}}    
     <form class="w-full mx-auto mb-3">   
