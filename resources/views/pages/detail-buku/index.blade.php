@@ -19,9 +19,9 @@
 
             <!-- Kontrol Navigasi PDF -->
             <div class="flex items-center justify-between w-full p-4 bg-gray-200 absolute bottom-0 left-0">
-                <button id="prev-page" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:bg-gray-400" disabled>Previous</button>
+                <button id="prev-page" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:bg-gray-400" disabled>Kembali</button>
                 <span id="page-info" class="text-gray-600"></span>
-                <button id="next-page" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:bg-gray-400">Next</button>
+                <button id="next-page" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:bg-gray-400">Lanjut</button>
             </div>
         </div>
 
@@ -44,7 +44,7 @@
             <a href="{{ asset($book->pdf_file) }}" target="_blank" class="block text-center px-4 py-2 bg-blueJR text-white rounded hover:bg-blue-700 transition duration-200 mb-2">
                 Lihat Detail
             </a>
-            <a href="{{ asset($book->pdf_file) }}" download="{{ $book->title }}.pdf" target="_blank" class="block text-center px-4 py-2 bg-blueJR text-white rounded hover:bg-blue-700 transition duration-200">
+            <a href="{{ asset($book->pdf_file) }}" download="{{ $book->type }} - {{ $book->title }}.pdf" target="_blank" class="block text-center px-4 py-2 bg-blueJR text-white rounded hover:bg-blue-700 transition duration-200">
                 Unduh {{ $book->type }}
             </a>
         </div>
@@ -100,7 +100,7 @@
             canvas.style.opacity = 0;
             setTimeout(() => {
                 page.render(renderContext).promise.then(() => {
-                    document.getElementById('page-info').textContent = `Page ${pageNum} of ${pdfDoc.numPages}`;
+                    document.getElementById('page-info').textContent = `Halaman ${pageNum} dari ${pdfDoc.numPages}`;
                     document.getElementById('prev-page').disabled = (pageNum <= 1);
                     document.getElementById('next-page').disabled = (pageNum >= pdfDoc.numPages);
                     canvas.style.opacity = 1;
@@ -113,7 +113,7 @@
     pdfjsLib.getDocument(url).promise.then(doc => {
         pdfDoc = doc;
         renderCover(); // Menampilkan cover dari halaman pertama
-        document.getElementById('page-info').textContent = `Page ${pageNum} of ${pdfDoc.numPages}`;
+        document.getElementById('page-info').textContent = `Halaman ${pageNum} dari ${pdfDoc.numPages}`;
         renderPage(pageNum);
     });
 

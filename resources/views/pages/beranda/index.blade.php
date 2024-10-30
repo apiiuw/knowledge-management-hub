@@ -1,7 +1,7 @@
 @extends('layouts.main')
 @section('container')
 
-<div class="bg-white w-full relative h-full pt-7 lg:pt-16">
+<div class="bg-white w-full relative h-full pt-7 lg:pt-16 font-jakartaSans">
     <!-- Carousel dan Logo Knowledge Management Hub (tetap) -->
     <div id="default-carousel" class="relative w-full" data-carousel="slide">
         <!-- Carousel wrapper -->
@@ -53,26 +53,23 @@
 
     <!-- Bagian Search dan Sidebar Kategori -->
     <div class="flex flex-col lg:flex-row justify-center mt-36 lg:mt-72 text-md lg:text-xl mx-[5%]">
-        <!-- Bagian Pencarian -->
         <div class="w-full lg:w-3/4">
-            <form class="w-full mx-auto">
+            <!-- Bagian Pencarian -->
+            <form action="{{ route('beranda') }}" method="GET" class="w-full mx-auto">
                 <div class="flex">
-                    <label for="search-dropdown" class="mb-2 text-sm font-medium text-gray-900 sr-only"></label>
-                    <button id="dropdown-button" data-dropdown-toggle="dropdown" class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm lg:text-lg font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-s-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100" type="button">
-                        Semua Kategori
-                        <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
-                        </svg>
-                    </button>
-                    <div id="dropdown" class="z-40 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44">
-                        <ul class="py-2 text-sm lg:text-lg text-gray-700" aria-labelledby="dropdown-button">
-                            <li><button type="button" class="inline-flex w-full px-4 py-2 hover:bg-gray-100">Artikel</button></li>
-                            <li><button type="button" class="inline-flex w-full px-4 py-2 hover:bg-gray-100">Buku Elektronik</button></li>
-                            <li><button type="button" class="inline-flex w-full px-4 py-2 hover:bg-gray-100">Studi Kasus</button></li>
-                        </ul>
+                    <!-- Dropdown Kategori -->
+                    <div class="relative">
+                        <select name="category" id="search-dropdown" class="block py-2.5 px-4 text-sm lg:text-lg text-gray-900 bg-gray-100 border border-gray-300 rounded-s-lg focus:ring-blueJR focus:border-blueJR">
+                            <option value="" {{ $category == '' ? 'selected' : '' }}>Semua Kategori</option>
+                            <option value="Artikel" {{ $category == 'Artikel' ? 'selected' : '' }}>Artikel</option>
+                            <option value="Buku Elektronik" {{ $category == 'Buku Elektronik' ? 'selected' : '' }}>Buku Elektronik</option>
+                            <option value="Studi Kasus" {{ $category == 'Studi Kasus' ? 'selected' : '' }}>Studi Kasus</option>
+                        </select>
                     </div>
+            
+                    <!-- Input Kata Kunci -->
                     <div class="relative w-full">
-                        <input type="search" id="search-dropdown" class="block p-2.5 w-full z-20 text-sm lg:text-lg text-gray-900 bg-gray-50 rounded-e-lg border-s-gray-50 border-s-2 border border-gray-300 focus:ring-blueJR focus:border-blueJR" placeholder="Cari Kata Kunci..." required />
+                        <input type="search" name="query" id="search-dropdown" class="block p-2.5 w-full z-20 text-sm lg:text-lg text-gray-900 bg-gray-50 rounded-e-lg border-s-gray-50 border-s-2 border border-gray-300 focus:ring-blueJR focus:border-blueJR" placeholder="Cari Kata Kunci..." value="{{ $query ?? '' }}" />
                         <button type="submit" class="absolute top-0 end-0 p-2.5 text-sm font-medium h-full text-white bg-blueJR rounded-e-lg border border-blueJR hover:bg-blue-500 focus:ring-4 focus:outline-none focus:ring-blue-300">
                             <svg class="w-3 h-3 lg:w-4 lg:h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
@@ -82,27 +79,32 @@
                     </div>
                 </div>
             </form>
-
-<!-- Daftar Item -->
-<div class="flex flex-wrap justify-center lg:justify-start gap-3 my-8">
-    @foreach ($books as $book) {{-- Assuming you pass the books collection to your view --}}
-        <div class="w-full lg:w-72 bg-white border border-gray-200 rounded-lg shadow-md shadow-black/30 dark:bg-gray-800 dark:border-gray-700 flex flex-col">
-            <a href="/detail-buku/{{ $book->id }}">
-                <img id="pdf-cover-{{ $book->id }}" class="rounded-t-lg w-full aspect-square lg:w-72 lg:h-72 object-cover" src="{{ asset('assets/images/pages/beranda/List-Buku/contoh1.jpg') }}" alt="Cover for {{ $book->title }}" />
-            </a>
-            <div class="p-5 flex flex-col flex-grow">
-                <a href="/detail-buku/{{ $book->id }}">
-                    <h5 class="mb-1 lg:mb-2 text-lg lg:text-xl font-bold tracking-tight text-gray-900 dark:text-white">{{ $book->title }}</h5>
-                </a>
-                <p class="mb-3 text-sm lg:text-base text-gray-700 dark:text-gray-400 line-clamp-3  flex-grow">{{ $book->description }}</p>
-                <a href="/detail-buku/{{ $book->id }}" class="inline-flex items-center justify-center text-base text-white bg-blueJR rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 mt-auto px-2 py-1">
-                    Baca selengkapnya
-                </a>                             
-            </div>
-        </div>
-    @endforeach
-</div>
-
+            
+            <!-- Daftar Item -->
+            <div class="flex flex-wrap justify-center lg:justify-start gap-3 my-8">
+                @if(isset($query) && $books->isEmpty())
+                    <p class="text-gray-500">Tidak ada hasil untuk "{{ $query }}" pada kategori "{{ $category }}".</p>
+                @else
+                    @foreach ($books as $book)
+                        <div class="w-full lg:w-72 bg-white border border-gray-200 rounded-lg shadow-md shadow-black/30 flex flex-col">
+                            <a href="/detail-buku/{{ $book->id }}">
+                                <img id="pdf-cover-{{ $book->id }}" class="rounded-t-lg w-full aspect-square lg:w-72 lg:h-72 object-cover" src="{{ asset('assets/images/pages/beranda/List-Buku/contoh1.jpg') }}" alt="Cover for {{ $book->title }}" />
+                            </a>
+                            <div class="p-5 flex flex-col flex-grow">
+                                <a href="/detail-buku/{{ $book->id }}">
+                                    <h5 class="mb-1 lg:mb-2 text-lg lg:text-xl font-bold tracking-tight text-gray-900">{{ $book->title }}</h5>
+                                </a>
+                                <p class="text-sm font-semibold lg:text-base text-black">Tipe Dokumen: {{ $book->type }}</p>
+                                <p class="mb-1 text-sm font-semibold lg:text-base text-black">Tahun Rilis: {{ $book->release_year }}</p>
+                                <p class="mb-3 text-sm lg:text-base text-gray-700 line-clamp-3 flex-grow">{{ $book->description }}</p>
+                                <a href="/detail-buku/{{ $book->id }}" class="inline-flex items-center justify-center text-base text-white bg-blueJR rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 mt-auto px-2 py-1">
+                                    Baca selengkapnya
+                                </a>                             
+                            </div>
+                        </div>
+                    @endforeach
+                @endif
+            </div>                               
 
             <!-- PDF.js -->
             <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
@@ -148,49 +150,65 @@
 
         </div>
 
+        @php
+            use Carbon\Carbon;
+            $years = range(Carbon::now()->year, Carbon::now()->year - 4);
+        @endphp
+
         <!-- Sidebar -->
-        <div class="hidden lg:block w-1/4 pl-4">
+        <div class="hidden lg:block w-1/4 pl-4 mb-8">
             <div class="bg-blueJR p-4 rounded-lg shadow-md">
                 <h2 class="text-xl font-semibold text-white mb-4">Kategori</h2>
                 <ul class="space-y-4">
 
-                    <!-- Kategori Artikel dengan background putih -->
+                    <!-- Kategori Artikel -->
                     <li class="bg-white p-3 rounded-lg">
                         <h3 class="text-lg font-semibold text-blueJR">Artikel</h3>
                         <details class="ml-4 group">
                             <summary class="text-lg font-semibold text-blueJR cursor-pointer hover:underline">Pilih Tahun</summary>
                             <ul class="space-y-1 mt-2 ml-4 border-l-2 border-blueJR pl-2">
-                                <li><a href="#" class="text-blueJR text-base flex items-center hover:underline"><span class="material-icons mr-2">Artikel</span>tahun 2024</a></li>
-                                <li><a href="#" class="text-blueJR text-base flex items-center hover:underline"><span class="material-icons mr-2">Artikel</span>tahun 2023</a></li>
-                                <li><a href="#" class="text-blueJR text-base flex items-center hover:underline"><span class="material-icons mr-2">Artikel</span>tahun 2022</a></li>
-                                <li><a href="#" class="text-blueJR text-base flex items-center hover:underline"><span class="material-icons mr-2">Artikel</span>tahun 2021</a></li>
-                                <li><a href="#" class="text-blueJR text-base flex items-center hover:underline"><span class="material-icons mr-2">Artikel</span>tahun 2020</a></li>
-                                <li><a href="#" class="text-blueJR text-base flex items-center underline"><span class="material-icons mr-2">Seluruh Artikel</span></a></li>
+                                @foreach ($years as $year)
+                                <li>
+                                    <a href="{{ route('beranda', ['category' => 'Artikel', 'release_year' => $year]) }}"
+                                       class="text-blueJR text-base flex items-center hover:underline {{ $release_year == $year ? 'font-bold underline' : '' }}">
+                                       Artikel tahun {{ $year }}
+                                    </a>
+                                </li>
+                                @endforeach
+                                <li>
+                                    <a href="{{ route('beranda', ['category' => 'Artikel']) }}" class="text-blueJR text-base flex items-center underline">Seluruh Artikel</a>
+                                </li>
                             </ul>
                         </details>
                     </li>
 
-                    <!-- Kategori Buku Elektronik (tetap dengan warna asli) -->
+                    <!-- Kategori Buku Elektronik -->
                     <li class="bg-white p-3 rounded-lg">
                         <h3 class="text-lg font-semibold text-blueJR">Buku Elektronik</h3>
                         <details class="ml-4 group">
                             <summary class="text-lg font-semibold text-blueJR cursor-pointer hover:underline">Pilih Tahun</summary>
                             <ul class="space-y-1 mt-2 ml-4 border-l-2 border-white pl-2">
-                                <li><a href="#" class="text-blueJR text-base flex items-center hover:underline"><span class="material-icons mr-2">Buku Elektronik</span>tahun 2024</a></li>
-                                <li><a href="#" class="text-blueJR text-base flex items-center hover:underline"><span class="material-icons mr-2">Buku Elektronik</span>tahun 2023</a></li>
-                                <li><a href="#" class="text-blueJR text-base flex items-center hover:underline"><span class="material-icons mr-2">Buku Elektronik</span>tahun 2022</a></li>
-                                <li><a href="#" class="text-blueJR text-base flex items-center hover:underline"><span class="material-icons mr-2">Buku Elektronik</span>tahun 2021</a></li>
-                                <li><a href="#" class="text-blueJR text-base flex items-center hover:underline"><span class="material-icons mr-2">Buku Elektronik</span>tahun 2020</a></li>
-                                <li><a href="#" class="text-blueJR text-base flex items-center underline"><span class="material-icons mr-2">Seluruh Buku Elektronik</span></a></li>
+                                @foreach ($years as $year)
+                                    <li>
+                                        <a href="{{ route('beranda', ['category' => 'Buku Elektronik', 'release_year' => $year]) }}" class="text-blueJR text-base flex items-center hover:underline">
+                                            Buku Elektronik tahun {{ $year }}
+                                        </a>
+                                    </li>
+                                @endforeach
+                                <li>
+                                    <a href="{{ route('beranda', ['category' => 'Buku Elektronik']) }}" class="text-blueJR text-base flex items-center underline">Seluruh Buku Elektronik</a>
+                                </li>
                             </ul>
                         </details>
                     </li>
 
-                    <!-- Kategori Studi Kasus dengan background putih -->
+                    <!-- Kategori Studi Kasus -->
                     <li class="bg-white p-3 rounded-lg">
                         <h3 class="text-lg font-semibold text-blueJR">Studi Kasus</h3>
                         <ul class="ml-4 space-y-1 mt-2 border-l-2 border-blueJR pl-2">
-                            <li><a href="#" class="text-blueJR text-base flex items-center underline"><span class="material-icons mr-2">Seluruh Studi Kasus</span></a></li>
+                            <li>
+                                <a href="{{ route('beranda', ['category' => 'Studi Kasus']) }}" class="text-blueJR text-base flex items-center underline">Seluruh Studi Kasus</a>
+                            </li>
                         </ul>
                     </li>
                 </ul>

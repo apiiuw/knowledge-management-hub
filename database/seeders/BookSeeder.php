@@ -11,7 +11,7 @@ class BookSeeder extends Seeder
     {
         Book::create([
             'title' => 'AWS CloudFormation User Guide',
-            'type' => 'E-Book',
+            'type' => 'Buku Elektronik',
             'cover_image' => 'path/to/cover_image.jpg',
             'release_year' => '2018',
             'description' => 'Buku ini menjelaskan tentang AWS CloudFormation dan cara mengelola sumber daya AWS.',
@@ -21,13 +21,23 @@ class BookSeeder extends Seeder
         ]);
         Book::create([
             'title' => 'Keselamatan Lalu Lintas',
-            'type' => 'E-Book',
+            'type' => 'Buku Elektronik',
             'cover_image' => 'path/to/cover_image.jpg',
             'release_year' => '2024',
-            'description' => 'Lalu lintas jalan mengacu pada pergerakan kendaraan, pejalan kaki, pengendara sepeda, dan entitas lain di jalan raya atau jalan raya.',
+            'description' => 'Lalu lintas jalan mengacu pada pergerakan kendaraan, pejalan kaki, pengendara sepeda, dan entitas lain di jalan raya.',
             'keywords' => 'Jasa Raharja, Keselamatan Lalu Lintas, E-Book',
             'download_link' => 'path/to/download.pdf',
             'pdf_file' => 'assets/e-buku/Keselamatan-LaluLintas.pdf',
+        ]);
+        Book::create([
+            'title' => 'Keselamatan Lalu Lintas Jalan',
+            'type' => 'Artikel',
+            'cover_image' => 'path/to/cover_image.jpg',
+            'release_year' => '2010',
+            'description' => 'Data Kepolisian RI menyebutkan, keterlibatan sepeda motor mencapai sekitar 70% dari total kasus kecelakaan lalu lintas jalan. Ditambah lagi dengan pertambahan jumlah kendaraaan bermotor roda-dua di Indonesia kini mencapai 24-30% dalam waktu satu tahun, dan tidak dibarengi dengan pembangunan infrastruktur yang memadai. Akibatnya potensi kecelakaan menjadi semakin besar (untuk roda dua, persentase kecelakaan lebih dari 67%, Dirjen Kementerian Perhubungan Darat di hadapan sekitar 40 peserta workshop tentang Keselamatan di Hotel Salak Bogor, 27-29 April 2010 oleh Bapak Suroyo Alimoeso, dan laporan Kapolri 29 Desember 2010, terjadi peningkatan angka kecelakaan dari tahu sebelumnya sebesar 1,04 % yaitu tahun 2009 sebanayak 59.164 kasus dan tahun 2010 sebanyak 61.606 kasus).',
+            'keywords' => 'Jasa Raharja, Keselamatan Lalu Lintas Jalan, Artikel',
+            'download_link' => 'path/to/download.pdf',
+            'pdf_file' => 'assets/artikel/Artikel-Keselamatan-Lalu-Lintas-Jalan.pdf',
         ]);
     }
 }
