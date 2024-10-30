@@ -39,5 +39,25 @@ class BookSeeder extends Seeder
             'download_link' => 'path/to/download.pdf',
             'pdf_file' => 'assets/artikel/Artikel-Keselamatan-Lalu-Lintas-Jalan.pdf',
         ]);
+        Book::create([
+            'title' => 'Model Pengintegrasian Pendidikan Lalu Lintas Kelas VII SMP MTs',
+            'type' => 'Buku Elektronik',
+            'cover_image' => 'path/to/cover_image.jpg',
+            'release_year' => '2017',
+            'description' => 'Untuk mewujudkan tujuan pendidikan nasional tersebut diperlukan profil kualifikasi kemampuan lulusan yang dituangkan dalam standar kompetensi lulusan. Penjelasan Pasal 35 UU Sisdiknas menyebutkan bahwa ”Standar kompetensi lulusan merupakan kualifikasi kemampuan lulusan yang mencakup sikap, pengetahuan, dan keterampilan peserta didik yang harus dipenuhinya atau dicapainya dari suatu satuan pendidikan pada jenjang pendidikan dasar dan menengah.”',
+            'keywords' => 'Pendidikan Lalu Lintas, E-Book, SMP, MTs, Kelas VII',
+            'download_link' => 'path/to/download.pdf',
+            'pdf_file' => 'assets/e-buku/Model Pengintegrasian Pendidikan Lalu Lintas Kelas VII SMP MTs.pdf',
+        ]);
+        Book::create([
+            'title' => 'Model Pengintegrasian Pendidikan Lalu Lintas Kelas 1 SD MI',
+            'type' => 'Artikel',
+            'cover_image' => 'path/to/cover_image.jpg',
+            'release_year' => '2017',
+            'description' => 'Data dari Korlantas Polri sampai dengan Desember 2014 menunjukkan bahwa pelanggaran lalu lintas baik berupa Tilang maupun teguran sebanyak 6.714.657 yang terdiri atas 4.402.715 Tilang dan 2.311.942 Teguran. Banyaknya data penindakan tersebut masih berupa tampilan permukaan dari jumlah sebenarnya pelanggaran lalu lintas yang terjadi di jalan, sehingga diperlukan langkah lebih lanjut untuk meningkatkan kesadaran masyarakat akan arti penting berlalu lintas yang berkeselamatan. .',
+            'keywords' => 'Pendidikan Lalu Lintas, E-Book, SD, MI, Kelas 1',
+            'download_link' => 'path/to/download.pdf',
+            'pdf_file' => 'assets/e-buku/Model Pengintegrasian Pendidikan Lalu Lintas Kelas 1 SD MI.pdf',
+        ]);
     }
 }

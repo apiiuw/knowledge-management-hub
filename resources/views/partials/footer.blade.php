@@ -1,4 +1,4 @@
-<footer class="footer bg-blueJR text-neutral-content items-center p-4 rounded-t-3xl flex flex-col md:flex-row justify-between gap-y-2">
+<footer class="footer relative z-50 bg-blueJR text-neutral-content items-center p-4 rounded-t-3xl flex flex-col md:flex-row justify-between gap-y-2">
   <!-- Kiri: Logo dan Hak Cipta -->
   <aside class="flex items-center gap-2 md:mb-0">
       <img src="{{ asset('assets/images/logo/Jasa Raharja Logo Utama.png') }}" class="h-10 w-10" />

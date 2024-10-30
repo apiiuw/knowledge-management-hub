@@ -13,8 +13,11 @@ Route::get('/', [BerandaController::class, 'index'])->name('beranda');
 // Rute untuk halaman tentang kami
 Route::get('/tentang-kami', [TentangKamiController::class, 'index'])->name('tentang-kami');
 
-// Rute untuk halaman FAQ
+// Rute untuk halaman forum diskusi
 Route::get('/forum-diskusi', [ForumDiskusiController::class, 'index'])->name('forum-diskusi');
+
+// Rute untuk halaman forum diskusi (tambah pertanyaan)
+Route::get('/tanya-admin', [ForumDiskusiController::class, 'add'])->name('forum-diskusi');
 
 // Rute untuk halaman kontak
 Route::get('/kontak', [KontakController::class, 'index'])->name('kontak');

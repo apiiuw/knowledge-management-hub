@@ -54,6 +54,20 @@
           <p class="text-gray-500">Check out the <a href="https://flowbite.com/figma/" class="text-blue-600 dark:text-blue-500 hover:underline">Figma design system</a> based on the utility classes from Tailwind CSS and components from Flowbite.</p>
         </div>
       </div>
+      <h2 id="accordion-collapse-heading-2">
+        <button type="button" class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-b-0 border-gray-200 focus:ring-4 focus:ring-blueJR hover:bg-gray-100 gap-3" data-accordion-target="#accordion-collapse-body-2" aria-expanded="false" aria-controls="accordion-collapse-body-2">
+          <span>Is there a Figma file available?</span>
+          <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+          </svg>
+        </button>
+      </h2>
+      <div id="accordion-collapse-body-2" class="hidden" aria-labelledby="accordion-collapse-heading-2">
+        <div class="p-5 border border-b-0 border-gray-200 dark:border-gray-700">
+          <p class="mb-2 text-gray-500">Flowbite is first conceptualized and designed using the Figma software so everything you see in the library has a design equivalent in our Figma file.</p>
+          <p class="text-gray-500">Check out the <a href="https://flowbite.com/figma/" class="text-blue-600 dark:text-blue-500 hover:underline">Figma design system</a> based on the utility classes from Tailwind CSS and components from Flowbite.</p>
+        </div>
+      </div>
       <h2 id="accordion-collapse-heading-3">
         <button type="button" class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-gray-200 focus:ring-4 focus:ring-blueJR hover:bg-gray-100 gap-3" data-accordion-target="#accordion-collapse-body-3" aria-expanded="false" aria-controls="accordion-collapse-body-3">
           <span>What are the differences between Flowbite and Tailwind UI?</span>
@@ -77,22 +91,8 @@
 
     {{-- Input Pertanyaan --}}
     <div class="mt-3 flex flex-col justify-center items-center font-jakartaSans">
-      <h1 class="text-xl text-blueJR font-semibold mb-3">Belum menemukan jawaban?</h1>
-      <form class="w-full">
-        <div class="w-full mb-4 border border-blueJR rounded-lg bg-gray-50">
-            <div class="px-4 py-2 bg-white rounded-t-lg">
-                <label for="comment" class="sr-only">Forum Diskusi</label>
-                <textarea id="comment" rows="4" class="w-full px-0 text-sm text-gray-900 bg-white border-0 focus:ring-0" placeholder="Tuliskan pertanyaanmu..." required ></textarea>
-            </div>
-            <div class="flex items-center justify-between px-3 py-2 border-t">
-                <button type="submit" class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-blueJR rounded-lg focus:ring-4 focus:ring-blue-200 hover:bg-blue-800">
-                    Kirim pertanyaan
-                </button>
-                <div class="flex ps-0 space-x-1 rtl:space-x-reverse sm:ps-2">
-                </div>
-            </div>
-        </div>
-      </form>
+      <h1 class="text-xl text-gray-500 font-semibold mb-3">Belum menemukan jawaban?</h1>
+      <h1 class="text-xl text-blueJR font-semibold mb-3"><span><i class="fa-solid fa-headset fa-lg mr-2"></i></span><a class="underline hover:text-blue-800" href="/tanya-admin">Klik di sini</a></h1>
     </div>
 
 </div>

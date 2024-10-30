@@ -58,19 +58,20 @@
             <form action="{{ route('beranda') }}" method="GET" class="w-full mx-auto">
                 <div class="flex">
                     <!-- Dropdown Kategori -->
+                    {{-- Auto Reload --}}
                     <div class="relative">
-                        <select name="category" id="search-dropdown" class="block py-2.5 px-4 text-sm lg:text-lg text-gray-900 bg-gray-100 border border-gray-300 rounded-s-lg focus:ring-blueJR focus:border-blueJR">
+                        <select name="category" id="search-dropdown" class="block py-2.5 px-4 text-sm lg:text-lg text-gray-900 bg-gray-100 border border-gray-700 rounded-s-lg focus:ring-blueJR focus:border-blueJR">
                             <option value="" {{ $category == '' ? 'selected' : '' }}>Semua Kategori</option>
                             <option value="Artikel" {{ $category == 'Artikel' ? 'selected' : '' }}>Artikel</option>
                             <option value="Buku Elektronik" {{ $category == 'Buku Elektronik' ? 'selected' : '' }}>Buku Elektronik</option>
                             <option value="Studi Kasus" {{ $category == 'Studi Kasus' ? 'selected' : '' }}>Studi Kasus</option>
                         </select>
                     </div>
-            
+
                     <!-- Input Kata Kunci -->
                     <div class="relative w-full">
-                        <input type="search" name="query" id="search-dropdown" class="block p-2.5 w-full z-20 text-sm lg:text-lg text-gray-900 bg-gray-50 rounded-e-lg border-s-gray-50 border-s-2 border border-gray-300 focus:ring-blueJR focus:border-blueJR" placeholder="Cari Kata Kunci..." value="{{ $query ?? '' }}" />
-                        <button type="submit" class="absolute top-0 end-0 p-2.5 text-sm font-medium h-full text-white bg-blueJR rounded-e-lg border border-blueJR hover:bg-blue-500 focus:ring-4 focus:outline-none focus:ring-blue-300">
+                        <input type="search" name="query" id="search-dropdown" class="block p-2.5 w-full z-20 text-sm lg:text-lg text-gray-900 bg-gray-50 rounded-e-lg border-s-gray-50 border-s-2 border border-gray-700 focus:ring-blueJR focus:border-blueJR" placeholder="Cari Kata Kunci..." value="{{ $query ?? '' }}" />
+                        <button type="submit" class="absolute top-0 end-0 p-2.5 text-sm font-medium h-full text-white bg-blueJR rounded-e-lg border border-blueJR hover:bg-blue-500 focus:ring-4 focus:outline-none focus:ring-blue-700">
                             <svg class="w-3 h-3 lg:w-4 lg:h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
                             </svg>
@@ -79,11 +80,28 @@
                     </div>
                 </div>
             </form>
+
+            <!-- Hasil Pencarian -->
+            @if(isset($query))
+                <div class="mt-4 text-gray-600 text-sm lg:text-base">
+                    @if($books->isEmpty())
+                        <p>Tidak ada hasil untuk pencarian "<strong>{{ $query }}</strong>" dalam "<strong>{{ $category ? $category : 'Semua Kategori' }}</strong>".</p>
+                    @else
+                        <p>Menampilkan <strong>{{ $books->total() }}</strong> hasil untuk pencarian "<strong>{{ $query }}</strong>" dalam "<strong>{{ $category ? $category : 'Semua Kategori' }}</strong>".</p>
+                    @endif
+                </div>
+            @endif
+
+            {{-- Toast Filter --}}
+
             
             <!-- Daftar Item -->
-            <div class="flex flex-wrap justify-center lg:justify-start gap-3 my-8">
+            @php
+                $justifyClass = $books->count() === 1 ? 'justify-start' : 'justify-center';
+            @endphp
+            <div class="flex flex-wrap justify-center lg:{{ $justifyClass }} gap-3 my-8">
                 @if(isset($query) && $books->isEmpty())
-                    <p class="text-gray-500">Tidak ada hasil untuk "{{ $query }}" pada kategori "{{ $category }}".</p>
+                    <div></div>
                 @else
                     @foreach ($books as $book)
                         <div class="w-full lg:w-72 bg-white border border-gray-200 rounded-lg shadow-md shadow-black/30 flex flex-col">
@@ -97,14 +115,79 @@
                                 <p class="text-sm font-semibold lg:text-base text-black">Tipe Dokumen: {{ $book->type }}</p>
                                 <p class="mb-1 text-sm font-semibold lg:text-base text-black">Tahun Rilis: {{ $book->release_year }}</p>
                                 <p class="mb-3 text-sm lg:text-base text-gray-700 line-clamp-3 flex-grow">{{ $book->description }}</p>
-                                <a href="/detail-buku/{{ $book->id }}" class="inline-flex items-center justify-center text-base text-white bg-blueJR rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 mt-auto px-2 py-1">
+                                <a href="/detail-buku/{{ $book->id }}" class="inline-flex items-center justify-center text-base text-white bg-blueJR rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-700 mt-auto px-2 py-2">
                                     Baca selengkapnya
                                 </a>                             
                             </div>
                         </div>
                     @endforeach
                 @endif
-            </div>                               
+            </div>
+
+            <!-- Pagination -->
+            @if ($books->isNotEmpty())
+                <nav aria-label="Page navigation example" class="my-8 flex justify-center">
+                    <ul class="inline-flex -space-x-px text-sm">
+                        {{-- Tombol Sebelumnya --}}
+                        <li>
+                            @if ($books->onFirstPage())
+                                <span class="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-700 rounded-s-lg cursor-not-allowed opacity-50">
+                                    Previous
+                                </span>
+                            @else
+                                <a href="{{ $books->previousPageUrl() . '&query=' . urlencode($query) . '&category=' . urlencode($category) }}" 
+                                class="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-700 rounded-s-lg hover:bg-gray-100 hover:text-gray-700">
+                                    Previous
+                                </a>
+                            @endif
+                        </li>
+
+                        {{-- Nomor Halaman --}}
+                        @php
+                            $currentPage = $books->currentPage();
+                            $lastPage = $books->lastPage();
+
+                            // Tentukan awal dan akhir berdasarkan posisi halaman saat ini
+                            if ($lastPage <= 3) {
+                                $start = 1;
+                                $end = $lastPage;
+                            } elseif ($currentPage == 1) {
+                                $start = 1;
+                                $end = 3;
+                            } elseif ($currentPage == $lastPage) {
+                                $start = $lastPage - 2;
+                                $end = $lastPage;
+                            } else {
+                                $start = $currentPage - 1;
+                                $end = $currentPage + 1;
+                            }
+                        @endphp
+
+                        @for ($i = $start; $i <= $end; $i++)
+                            <li>
+                                <a href="{{ $books->url($i) . '&query=' . urlencode($query) . '&category=' . urlencode($category) }}" 
+                                class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-700 {{ $i === $currentPage ? 'text-blue-600 border-blue-700 bg-blue-50 hover:bg-blue-100' : 'hover:bg-gray-100 hover:text-gray-700' }}">
+                                    {{ $i }}
+                                </a>
+                            </li>
+                        @endfor
+
+                        {{-- Tombol Berikutnya --}}
+                        <li>
+                            @if (!$books->hasMorePages())
+                                <span class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-700 rounded-e-lg cursor-not-allowed opacity-50">
+                                    Next
+                                </span>
+                            @else
+                                <a href="{{ $books->nextPageUrl() . '&query=' . urlencode($query) . '&category=' . urlencode($category) }}" 
+                                class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-700 rounded-e-lg hover:bg-gray-100 hover:text-gray-700">
+                                    Next
+                                </a>
+                            @endif
+                        </li>
+                    </ul>
+                </nav>
+            @endif
 
             <!-- PDF.js -->
             <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
@@ -159,21 +242,22 @@
         <div class="hidden lg:block w-1/4 pl-4 mb-8">
             <div class="bg-blueJR p-4 rounded-lg shadow-md">
                 <h2 class="text-xl font-semibold text-white mb-4">Kategori</h2>
+                {{-- Radio Button --}}
                 <ul class="space-y-4">
 
                     <!-- Kategori Artikel -->
                     <li class="bg-white p-3 rounded-lg">
                         <h3 class="text-lg font-semibold text-blueJR">Artikel</h3>
                         <details class="ml-4 group">
+                            {{-- Pilih tahun hapus --}}
                             <summary class="text-lg font-semibold text-blueJR cursor-pointer hover:underline">Pilih Tahun</summary>
                             <ul class="space-y-1 mt-2 ml-4 border-l-2 border-blueJR pl-2">
-                                @foreach ($years as $year)
-                                <li>
-                                    <a href="{{ route('beranda', ['category' => 'Artikel', 'release_year' => $year]) }}"
-                                       class="text-blueJR text-base flex items-center hover:underline {{ $release_year == $year ? 'font-bold underline' : '' }}">
-                                       Artikel tahun {{ $year }}
-                                    </a>
-                                </li>
+                                @foreach ($articleYears as $year)
+                                    <li>
+                                        <a href="{{ route('beranda', ['category' => 'Artikel', 'release_year' => $year, 'query' => request('query')]) }}" class="text-blueJR text-base flex items-center hover:underline">
+                                            Artikel tahun {{ $year }}
+                                        </a>
+                                    </li>
                                 @endforeach
                                 <li>
                                     <a href="{{ route('beranda', ['category' => 'Artikel']) }}" class="text-blueJR text-base flex items-center underline">Seluruh Artikel</a>
@@ -188,9 +272,9 @@
                         <details class="ml-4 group">
                             <summary class="text-lg font-semibold text-blueJR cursor-pointer hover:underline">Pilih Tahun</summary>
                             <ul class="space-y-1 mt-2 ml-4 border-l-2 border-white pl-2">
-                                @foreach ($years as $year)
+                                @foreach ($bookYears as $year)
                                     <li>
-                                        <a href="{{ route('beranda', ['category' => 'Buku Elektronik', 'release_year' => $year]) }}" class="text-blueJR text-base flex items-center hover:underline">
+                                        <a href="{{ route('beranda', ['category' => 'Buku Elektronik', 'release_year' => $year, 'query' => request('query')]) }}" class="text-blueJR text-base flex items-center hover:underline">
                                             Buku Elektronik tahun {{ $year }}
                                         </a>
                                     </li>
