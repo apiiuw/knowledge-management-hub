@@ -58,15 +58,16 @@
             <form action="{{ route('beranda') }}" method="GET" class="w-full mx-auto">
                 <div class="flex">
                     <!-- Dropdown Kategori -->
-                    {{-- Auto Reload --}}
                     <div class="relative">
-                        <select name="category" id="search-dropdown" class="block py-2.5 px-4 text-sm lg:text-lg text-gray-900 bg-gray-100 border border-gray-700 rounded-s-lg focus:ring-blueJR focus:border-blueJR">
+                        <select name="category" id="search-dropdown" 
+                            class="block py-2.5 px-4 text-sm lg:text-lg text-gray-900 bg-gray-100 border border-gray-700 rounded-s-lg focus:ring-blueJR focus:border-blueJR"
+                            onchange="location.href='{{ route('beranda', ['release_year' => request('release_year'), 'category' => '']) }}'.replace(/category=/, 'category=' + this.value + '&')">
                             <option value="" {{ $category == '' ? 'selected' : '' }}>Semua Kategori</option>
                             <option value="Artikel" {{ $category == 'Artikel' ? 'selected' : '' }}>Artikel</option>
                             <option value="Buku Elektronik" {{ $category == 'Buku Elektronik' ? 'selected' : '' }}>Buku Elektronik</option>
                             <option value="Studi Kasus" {{ $category == 'Studi Kasus' ? 'selected' : '' }}>Studi Kasus</option>
                         </select>
-                    </div>
+                    </div>                    
 
                     <!-- Input Kata Kunci -->
                     <div class="relative w-full">
@@ -83,17 +84,61 @@
 
             <!-- Hasil Pencarian -->
             @if(isset($query))
-                <div class="mt-4 text-gray-600 text-sm lg:text-base">
-                    @if($books->isEmpty())
-                        <p>Tidak ada hasil untuk pencarian "<strong>{{ $query }}</strong>" dalam "<strong>{{ $category ? $category : 'Semua Kategori' }}</strong>".</p>
-                    @else
-                        <p>Menampilkan <strong>{{ $books->total() }}</strong> hasil untuk pencarian "<strong>{{ $query }}</strong>" dalam "<strong>{{ $category ? $category : 'Semua Kategori' }}</strong>".</p>
-                    @endif
-                </div>
+            <div class="mt-4 text-gray-600 text-sm lg:text-base">
+                @if($books->isEmpty())
+                    <p>Tidak ada hasil untuk pencarian "<strong>{{ $query }}</strong>" dalam "<strong>{{ $category ? $category : 'Semua Kategori' }}</strong>" pada tahun "<strong>{{ $release_year ?? 'Semua Tahun' }}</strong>".</p>
+                @else
+                    <p>Menampilkan <strong>{{ $books->total() }}</strong> hasil untuk pencarian "<strong>{{ $query }}</strong>" dalam "<strong>{{ $category ? $category : 'Semua Kategori' }}</strong>" pada tahun "<strong>{{ $release_year ?? 'Seluruh Tahun' }}</strong>".</p>
+                @endif
+            </div>
             @endif
 
             {{-- Toast Filter --}}
+            <div class="w-full flex justify-center">
+                <div id="toast-success" class="hidden md:flex items-center w-fit px-4 py-3 mt-4 text-white bg-blueJR rounded-lg shadow dark:text-gray-400 dark:bg-gray-800" role="alert" style="display: none;">
+                    <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-green-500 bg-green-100 rounded-lg dark:bg-green-800 dark:text-green-200">
+                        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
+                        </svg>
+                        <span class="sr-only">Check icon</span>
+                    </div>
+                    <div class="ms-3 mr-3 text-sm font-normal">
+                        Filter {{ !empty($category) ? $category : 'Semua Kategori' }} pada tahun <strong>{{ $release_year ?? 'Semua Tahun' }}</strong> Berhasil.
+                    </div>
+                    <button type="button" class="ms-auto -mx-1.5 -my-1.5 bg-white text-red-500 hover:text-red-600 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex items-center justify-center h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700" aria-label="Close" onclick="hideToast()">
+                        <span class="sr-only">Close</span>
+                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
 
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    if (localStorage.getItem('showToast') === 'true') {
+                        showToast(); 
+                        localStorage.removeItem('showToast'); 
+                    }
+            
+                    const closeButton = document.querySelector("#toast-success button[aria-label='Close']");
+                    if (closeButton) {
+                        closeButton.addEventListener('click', function() {
+                            hideToast(); 
+                        });
+                    }
+                });
+            
+                function showToast() {
+                    const toast = document.getElementById('toast-success');
+                    toast.style.display = 'flex'; 
+                }
+            
+                function hideToast() {
+                    const toast = document.getElementById('toast-success');
+                    toast.style.display = 'none'; 
+                }
+            </script>            
             
             <!-- Daftar Item -->
             @php
@@ -233,72 +278,119 @@
 
         </div>
 
-        @php
-            use Carbon\Carbon;
-            $years = range(Carbon::now()->year, Carbon::now()->year - 4);
-        @endphp
-
         <!-- Sidebar -->
         <div class="hidden lg:block w-1/4 pl-4 mb-8">
             <div class="bg-blueJR p-4 rounded-lg shadow-md">
-                <h2 class="text-xl font-semibold text-white mb-4">Kategori</h2>
-                {{-- Radio Button --}}
-                <ul class="space-y-4">
+                <h2 class="text-xl font-semibold text-white mb-4">
+                    Filter {{ !empty($category) ? $category : 'Semua Kategori' }}
+                </h2>
+                        
+                <div class="bg-white p-5 rounded-lg">
+                    <div class="flex flex-col space-y-3">
+                        @php
+                            $currentYear = date('Y');
+                            $lastFiveYears = range($currentYear, $currentYear - 4);
+                        @endphp
 
-                    <!-- Kategori Artikel -->
-                    <li class="bg-white p-3 rounded-lg">
-                        <h3 class="text-lg font-semibold text-blueJR">Artikel</h3>
-                        <details class="ml-4 group">
-                            {{-- Pilih tahun hapus --}}
-                            <summary class="text-lg font-semibold text-blueJR cursor-pointer hover:underline">Pilih Tahun</summary>
-                            <ul class="space-y-1 mt-2 ml-4 border-l-2 border-blueJR pl-2">
-                                @foreach ($articleYears as $year)
-                                    <li>
-                                        <a href="{{ route('beranda', ['category' => 'Artikel', 'release_year' => $year, 'query' => request('query')]) }}" class="text-blueJR text-base flex items-center hover:underline">
-                                            Artikel tahun {{ $year }}
-                                        </a>
-                                    </li>
-                                @endforeach
-                                <li>
-                                    <a href="{{ route('beranda', ['category' => 'Artikel']) }}" class="text-blueJR text-base flex items-center underline">Seluruh Artikel</a>
-                                </li>
-                            </ul>
-                        </details>
-                    </li>
+                        <h2 class="text-lg font-semibold text-blueJR">Tahun Publikasi</h2>
+                        <!-- Tahun -->
+                        @foreach ($lastFiveYears as $year)
+                        <div class="flex items-center gap-y-2">
+                            <input 
+                                id="radio-{{ $year }}" 
+                                type="radio" 
+                                value="{{ $year }}" 
+                                name="year-filter" 
+                                class="w-5 h-5 text-blueJR bg-gray-500 border-gray-500 focus:ring-blueJR focus:ring-2"
+                                onclick="localStorage.setItem('showToast', 'true'); location.href='{{ route('beranda', ['release_year' => $year, 'category' => request('category'), 'query' => request('query')]) }}';"
+                                {{ request('release_year') == $year ? 'checked' : '' }}
+                            />
+                            <label for="radio-{{ $year }}" class="ms-2 text-sm font-medium {{ request('release_year') == $year ? 'text-blueJR' : 'text-gray-500' }}">
+                                {{ $year }}
+                            </label>
+                        </div>
+                        @endforeach
+                        
+                        <!-- Kostum Input Tahun -->
+                        <div class="flex items-center gap-y-2">
+                            <input 
+                                id="radio-custom" 
+                                type="radio" 
+                                name="year-filter" 
+                                class="w-5 h-5 text-blueJR bg-gray-500 border-gray-500 focus:ring-blueJR focus:ring-2"
+                                {{ in_array(request('release_year'), $lastFiveYears) ? '' : 'checked' }}
+                                onclick="toggleInputState(this)"
+                            />
+                            <input 
+                                type="text"  
+                                id="yearInput" 
+                                placeholder="Tahun Lainnya" 
+                                inputmode="numeric" 
+                                class="ml-2 border-gray-300 rounded w-32 p-2 text-sm text-gray-700 focus:ring-blueJR focus:border-blueJR"
+                                oninput="this.value = this.value.replace(/[^0-9]/g, ''); if(this.value.length === 4) { location.href='{{ route('beranda', ['release_year' => '', 'category' => request('category'), 'query' => request('query')]) }}'.replace(/release_year=/, 'release_year=' + this.value); showToast(); }"
+                                maxlength="4"  
+                                style="outline: none;"  
+                            />                                         
+                        </div>
 
-                    <!-- Kategori Buku Elektronik -->
-                    <li class="bg-white p-3 rounded-lg">
-                        <h3 class="text-lg font-semibold text-blueJR">Buku Elektronik</h3>
-                        <details class="ml-4 group">
-                            <summary class="text-lg font-semibold text-blueJR cursor-pointer hover:underline">Pilih Tahun</summary>
-                            <ul class="space-y-1 mt-2 ml-4 border-l-2 border-white pl-2">
-                                @foreach ($bookYears as $year)
-                                    <li>
-                                        <a href="{{ route('beranda', ['category' => 'Buku Elektronik', 'release_year' => $year, 'query' => request('query')]) }}" class="text-blueJR text-base flex items-center hover:underline">
-                                            Buku Elektronik tahun {{ $year }}
-                                        </a>
-                                    </li>
-                                @endforeach
-                                <li>
-                                    <a href="{{ route('beranda', ['category' => 'Buku Elektronik']) }}" class="text-blueJR text-base flex items-center underline">Seluruh Buku Elektronik</a>
-                                </li>
-                            </ul>
-                        </details>
-                    </li>
+                        <script>
+                            // Function to toggle the input state based on the radio button
+                            function toggleInputState(radio) {
+                                const yearInput = document.getElementById('yearInput');
 
-                    <!-- Kategori Studi Kasus -->
-                    <li class="bg-white p-3 rounded-lg">
-                        <h3 class="text-lg font-semibold text-blueJR">Studi Kasus</h3>
-                        <ul class="ml-4 space-y-1 mt-2 border-l-2 border-blueJR pl-2">
-                            <li>
-                                <a href="{{ route('beranda', ['category' => 'Studi Kasus']) }}" class="text-blueJR text-base flex items-center underline">Seluruh Studi Kasus</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
+                                // Check if the custom radio button is checked
+                                if (radio.id === 'radio-custom' && radio.checked) {
+                                    // If custom is checked, allow input and remove placeholder
+                                    yearInput.placeholder = ''; // Remove placeholder
+                                    yearInput.focus(); // Focus on the input
+                                } else {
+                                    // If any other radio button is checked, clear the input value and set placeholder
+                                    yearInput.value = ''; // Clear input value
+                                    yearInput.placeholder = 'Tahun Lainnya'; // Restore placeholder
+                                }
+                            }
+
+                            // Handle the initial state based on the current selection
+                            document.addEventListener('DOMContentLoaded', function () {
+                                const yearInput = document.getElementById('yearInput');
+                                const customRadio = document.getElementById('radio-custom');
+
+                                // Keep the input value if the page is loaded with a year
+                                const currentYear = '{{ request('release_year') }}';
+                                if (currentYear) {
+                                    yearInput.value = currentYear; // Set input value to current year
+                                }
+
+                                // Set the initial placeholder based on the current selection
+                                if (customRadio.checked) {
+                                    yearInput.placeholder = ''; // If custom is checked, remove placeholder
+                                } else {
+                                    yearInput.value = ''; // Clear input if custom is not checked
+                                    yearInput.placeholder = 'Tahun Lainnya'; // Restore placeholder
+                                }
+                            });
+                        </script>
+
+                        <!-- All Years Option -->
+                        <div class="flex items-center gap-y-2">
+                            <input 
+                                id="radio-all" 
+                                type="radio" 
+                                value="" 
+                                name="year-filter" 
+                                class="w-5 h-5 text-blueJR bg-gray-500 border-gray-500 focus:ring-blueJR focus:ring-2"
+                                onclick="localStorage.setItem('showToast', 'true'); location.href='{{ route('beranda', ['release_year' => '', 'category' => request('category'), 'query' => request('query')]) }}';"
+                                {{ request('release_year') == null ? 'checked' : '' }}
+                            />
+                            <label for="radio-all" class="ms-2 text-sm font-medium {{ request('release_year') == null ? 'text-blueJR' : 'text-gray-500' }}">
+                                Seluruh Tahun
+                            </label>
+                        </div>
+
+                    </div>
+                </div>
             </div>
         </div>
-
     </div>
 </div>
 

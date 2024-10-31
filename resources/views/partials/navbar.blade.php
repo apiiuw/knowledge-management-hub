@@ -30,16 +30,16 @@
         <div class="hidden w-full md:flex md:w-auto md:order-1" id="navbar-user">
             <ul class="flex flex-col font-medium text-lg p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white font-jakartaSans">
                 <li>
-                    <a href="/" class="block py-2 px-3 {{ $active === 'beranda' ? 'text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700' : 'text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700' }}" aria-current="page">BERANDA</a>
+                    <a href="/" class="block py-2 px-3 {{ $active === 'beranda' ? 'text-white bg-blueJR rounded md:bg-transparent md:text-blueJR' : 'text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blueJR' }}" aria-current="page">BERANDA</a>
                 </li>
                 <li>
-                    <a href="/tentang-kami" class="block py-2 px-3 {{ $active === 'tentang-kami' ? 'text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700' : 'text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700' }}">TENTANG KAMI</a>
+                    <a href="/tentang-kami" class="block py-2 px-3 {{ $active === 'tentang-kami' ? 'text-white bg-blueJR rounded md:bg-transparent md:text-blueJR' : 'text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blueJR' }}">TENTANG KAMI</a>
                 </li>
                 <li>
-                    <a href="/forum-diskusi" class="block py-2 px-3 {{ $active === 'forum-diskusi' ? 'text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700' : 'text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700' }}">FORUM DISKUSI</a>
+                    <a href="/forum-diskusi" class="block py-2 px-3 {{ $active === 'forum-diskusi' ? 'text-white bg-blueJR rounded md:bg-transparent md:text-blueJR' : 'text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blueJR' }}">FORUM DISKUSI</a>
                 </li>
                 <li>
-                    <a href="/kontak" class="block py-2 px-3 {{ $active === 'kontak' ? 'text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700' : 'text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700' }}">KONTAK</a>
+                    <a href="/kontak" class="block py-2 px-3 {{ $active === 'kontak' ? 'text-white bg-blueJR rounded md:bg-transparent md:text-blueJR' : 'text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blueJR' }}">KONTAK</a>
                 </li>
             </ul>            
         </div>
