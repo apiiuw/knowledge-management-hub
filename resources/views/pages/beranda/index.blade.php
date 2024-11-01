@@ -8,15 +8,15 @@
         <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
             <!-- Item 1 -->
             <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                <img src="{{ asset('assets/images/pages/beranda/BerandaPresent1.png') }}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                <img src="{{ asset('assets/images/pages/beranda/BerandaPresentEdu1.png') }}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
             </div>
             <!-- Item 2 -->
             <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                <img src="{{ asset('assets/images/pages/beranda/BerandaPresent2.png') }}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                <img src="{{ asset('assets/images/pages/beranda/BerandaPresentEdu2.png') }}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
             </div>
             <!-- Item 3 -->
             <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                <img src="{{ asset('assets/images/pages/beranda/BerandaPresent3.png') }}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                <img src="{{ asset('assets/images/pages/beranda/BerandaPresentEdu3.png') }}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
             </div>
         </div>
         <!-- Slider indicators -->
@@ -44,15 +44,103 @@
         </button>
     </div>
 
+    <style>
+        .oauthButton {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            padding: auto 15px 15px auto;
+            padding-left: 2rem;
+            padding-right: 2rem;
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+            border-radius: 10px;
+            border: 2px solid var(--main-color);
+            background-color: var(--bg-color);
+            box-shadow: 4px 4px var(--main-color);
+            font-size: 26px;
+            font-weight: 600;
+            background-color: #277fc6;
+            cursor: pointer;
+            transition: all 250ms;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+    
+        .oauthButton::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 0;
+            background-color: #043257;
+            color: #277fc6;
+            z-index: -1;
+            -webkit-box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
+            box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
+            transition: all 250ms;
+        }
+    
+        .oauthButton:hover::before {
+            width: 100%;
+        }
+    
+        .icon {
+            width: 1.5rem;
+            height: 1.5rem;
+        }
+    
+        /* Media query for mobile view */
+        @media (max-width: 768px) {
+            .oauthButton {
+                padding-left: 1rem;
+                padding-right: 1rem;
+                padding-top: 0.3rem;
+                padding-bottom: 0.3rem;
+                font-size: 20px; /* Reduce font size */
+                border-radius: 8px; /* Slightly smaller radius */
+                box-shadow: 2px 2px var(--main-color); /* Reduce shadow size */
+            }
+    
+            .icon {
+                width: 1.2rem;
+                height: 1.2rem; /* Smaller icon */
+            }
+        }
+    
+        @media (max-width: 480px) {
+            .oauthButton {
+                padding-left: 0.5rem;
+                padding-right: 0.5rem;
+                padding-top: 0.2rem;
+                padding-bottom: 0.2rem;
+                font-size: 16px; /* Further reduce font size */
+                border-radius: 6px;
+                box-shadow: 1px 1px var(--main-color); /* Minimal shadow */
+            }
+    
+            .icon {
+                width: 1rem;
+                height: 1rem; /* Even smaller icon */
+            }
+        }
+    </style>    
+
     <div class="bg-white absolute z-30 left-1/2 -translate-x-1/2 -mt-16 lg:-mt-12 flex flex-col justify-center items-center shadow-lg shadow-black/20 rounded-lg p-4 pt-3 pb-6 w-4/5">
         <img class=" w-28 lg:w-56" src="{{ asset('assets/images/logo/Jasa Raharja Logo Member of IFG.png') }}" alt="">
-        <p class="text-md lg:text-3xl font-jakartaSans font-bold text-black text-center mt-3">
-            KNOWLEDGE MANAGEMENT HUB<br><span class="text-sm lg:text-2xl text-white bg-blueJR px-3 py-1">Jasa Raharja Cabang DKI Jakarta</span>
+        <p class="text-md lg:text-3xl flex flex-col font-jakartaSans font-bold text-black text-center mt-3">
+            Platform Digital Keselamatan Lalu Lintas
         </p>
+        <button type="button" class="oauthButton text-white bg-blueJR text-3xl mt-3">
+            EduLaluLintas.com
+        </button>
     </div>
 
     <!-- Bagian Search dan Sidebar Kategori -->
-    <div class="flex flex-col lg:flex-row justify-center mt-36 lg:mt-72 text-md lg:text-xl mx-[5%]">
+    <div class="flex flex-col lg:flex-row justify-center mt-48 lg:mt-80 text-md lg:text-xl mx-[5%]">
         <div class="w-full lg:w-3/4">
             <!-- Bagian Pencarian -->
             <form action="{{ route('beranda') }}" method="GET" class="w-full mx-auto">
@@ -327,10 +415,16 @@
                                 placeholder="Tahun Lainnya" 
                                 inputmode="numeric" 
                                 class="ml-2 border-gray-300 rounded w-32 p-2 text-sm text-gray-700 focus:ring-blueJR focus:border-blueJR"
-                                oninput="this.value = this.value.replace(/[^0-9]/g, ''); if(this.value.length === 4) { location.href='{{ route('beranda', ['release_year' => '', 'category' => request('category'), 'query' => request('query')]) }}'.replace(/release_year=/, 'release_year=' + this.value); showToast(); }"
+                                oninput="
+                                    this.value = this.value.replace(/[^0-9]/g, ''); 
+                                    if(this.value.length === 4) { 
+                                        localStorage.setItem('showToast', 'true'); 
+                                        location.href='{{ route('beranda', ['release_year' => '', 'category' => request('category'), 'query' => request('query')]) }}'
+                                        .replace(/release_year=/, 'release_year=' + this.value); 
+                                    }"
                                 maxlength="4"  
                                 style="outline: none;"  
-                            />                                         
+                            />                                   
                         </div>
 
                         <script>

@@ -6,6 +6,9 @@ use App\Http\Controllers\TentangKamiController;
 use App\Http\Controllers\ForumDiskusiController;
 use App\Http\Controllers\KontakController;
 use App\Http\Controllers\DetailBukuController;
+use App\Http\Controllers\MasukController;
+
+Route::get('/masuk', [MasukController::class, 'index'])->name('masuk');
 
 // Rute untuk halaman utama
 Route::get('/', [BerandaController::class, 'index'])->name('beranda');
