@@ -17,11 +17,25 @@
         {{-- ICON --}}
         <script src="https://kit.fontawesome.com/d7833bfda5.js" crossorigin="anonymous"></script>
 
+        {{-- TAILWIND CSS --}}
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script>
+          tailwind.config = {
+            theme: {
+              extend: {
+                colors: {
+                    blueJR: '#277FC6',
+                }
+              }
+            }
+          }
+        </script>
+
         @vite('resources/css/app.css')
     </head>
+
     <body class="font-jakartaSans antialiased bg-white">
-        @include('partials.navbar')
+        @include('admin.partials.sidebar-admin')
         @yield('container')
-        @include('partials.footer')
     </body>
 </html>
