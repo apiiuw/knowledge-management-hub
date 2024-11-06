@@ -13,14 +13,18 @@ use App\Http\Middleware\AdminMiddleware;
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\AdminBukuController;
 use App\Http\Controllers\AdminForumDiskusiController;
+use App\Http\Controllers\PengaturanAkunController;
 
 // Rute untuk halaman dashboard admin
 Route::middleware([AdminMiddleware::class])->group(function () {
     Route::get('/admin-dashboard', [AdminDashboardController::class, 'index'])->name('admin.pages.dashboard');
     Route::get('/admin-buku', [AdminBukuController::class, 'index'])->name('admin.pages.buku');
+    Route::get('/admin-buku/tambah', [AdminBukuController::class, 'create'])->name('admin.buku.create');
+    Route::get('/admin-buku/{id}/edit', [AdminBukuController::class, 'edit'])->name('admin.buku.edit');
+    Route::delete('/admin-buku/{id}', [AdminBukuController::class, 'destroy'])->name('admin.buku.destroy');
     Route::get('/admin-forum-diskusi', [AdminForumDiskusiController::class, 'index'])->name('admin.pages.forum-diskusi');
+    Route::get('/admin-pengaturan-akun', [PengaturanAkunController::class, 'index'])->name('admin.pages.pengaturan-akun');
 });
-
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
