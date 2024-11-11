@@ -23,6 +23,9 @@ Route::middleware([AdminMiddleware::class])->group(function () {
     Route::get('/admin-buku/{id}/edit', [AdminBukuController::class, 'edit'])->name('admin.buku.edit');
     Route::delete('/admin-buku/{id}', [AdminBukuController::class, 'destroy'])->name('admin.buku.destroy');
     Route::get('/admin-forum-diskusi', [AdminForumDiskusiController::class, 'index'])->name('admin.pages.forum-diskusi');
+    Route::post('/forum/update-jawaban/{id}', [AdminForumDiskusiController::class, 'updateJawabanDanStatus'])->name('forum.updateJawabanDanStatus');
+    Route::patch('/forum-diskusi/{id}/update-answer', [AdminForumDiskusiController::class, 'updateAnswer'])->name('forum-diskusi.update-answer');
+    Route::delete('/forum-diskusi/{id}', [AdminForumDiskusiController::class, 'destroy'])->name('forum-diskusi.destroy');
     Route::get('/admin-pengaturan-akun', [PengaturanAkunController::class, 'index'])->name('admin.pages.pengaturan-akun');
 });
 
@@ -46,7 +49,10 @@ Route::get('/tentang-kami', [TentangKamiController::class, 'index'])->name('tent
 Route::get('/forum-diskusi', [ForumDiskusiController::class, 'index'])->name('forum-diskusi');
 
 // Rute untuk halaman forum diskusi (tambah pertanyaan)
-Route::get('/tanya-admin', [ForumDiskusiController::class, 'add'])->name('forum-diskusi');
+Route::get('/tanya-admin', [ForumDiskusiController::class, 'add'])->name('forum-diskusi-tanya');
+
+// Rute untuk mengirim pertanyaan
+Route::post('/forum-diskusi', [ForumDiskusiController::class, 'store'])->name('forum-diskusi.store');
 
 // Rute untuk halaman kontak
 Route::get('/kontak', [KontakController::class, 'index'])->name('kontak');

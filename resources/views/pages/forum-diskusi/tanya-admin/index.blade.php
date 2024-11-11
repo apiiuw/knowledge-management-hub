@@ -20,11 +20,12 @@
         <p class="text-sm lg:text-2xl font-jakartaSans font-semibold text-white bg-blueJR rounded-md px-3 py-2 mt-1">
             <i class="fa-solid fa-headset fa-lg mr-2"></i>Tanya Admin
         </p>
-        <form class="w-full mt-3">
+        <form action="{{ route('forum-diskusi.store') }}" method="POST" class="w-full mt-3">
+            @csrf
             <div class="w-full mb-4 border border-blueJR rounded-lg bg-gray-50">
                 <div class="px-4 py-2 bg-white rounded-t-lg">
                     <label for="comment" class="sr-only">Forum Diskusi</label>
-                    <textarea id="comment" rows="4" class="w-full px-0 text-sm text-gray-900 bg-white border-0 focus:ring-0" placeholder="Tuliskan pertanyaanmu..." required ></textarea>
+                    <textarea id="comment" name="question" rows="4" class="w-full px-0 text-sm text-gray-900 bg-white border-0 focus:ring-0" placeholder="Tuliskan pertanyaanmu..." required ></textarea>
                 </div>
                 <div class="flex items-center justify-between px-3 py-2 border-t">
                     <button type="submit" class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-blueJR rounded-lg focus:ring-4 focus:ring-blue-200 hover:bg-blue-800">
