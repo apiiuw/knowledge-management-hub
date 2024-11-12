@@ -95,6 +95,43 @@ class AdminBukuController extends Controller
         ]);
     }
 
+    public function update(Request $request, $id)
+    {
+        // Validate the form data
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'type' => 'required|string',
+            'release_year' => 'required|integer|min:1900|max:' . date('Y'),
+            'description' => 'required|string',
+            'keywords' => 'nullable|string',
+            'book_file' => 'nullable|file|mimes:pdf|max:2048', // optional file validation
+        ]);
+
+        // Find the book by ID
+        $book = Book::findOrFail($id);
+
+        // Update book details
+        $book->title = $request->input('title');
+        $book->type = $request->input('type');
+        $book->release_year = $request->input('release_year');
+        $book->description = $request->input('description');
+        $book->keywords = $request->input('keywords');
+
+        // Handle file upload if a new file is uploaded
+        if ($request->hasFile('book_file')) {
+            $file = $request->file('book_file');
+            $fileName = time() . '_' . $file->getClientOriginalName();
+            $file->storeAs('public/books', $fileName); // store file in 'public/books' directory
+            $book->pdf_file = $fileName;
+        }
+
+        // Save the changes
+        $book->save();
+
+        // Redirect back with a success message
+        return redirect()->route('admin.pages.buku')->with('success', 'Buku berhasil diperbarui.');
+    }
+
     public function destroy($id)
     {
         // Temukan buku berdasarkan ID dan hapus

@@ -15,7 +15,7 @@ class CreateBooksTable extends Migration
             $table->string('cover_image'); // URL untuk Cover Buku
             $table->year('release_year'); // Tahun Rilis
             $table->text('description'); // Deskripsi Buku
-            $table->string('keywords'); // Kata Kunci
+            $table->text('keywords'); // Kata Kunci
             $table->string('download_link'); // URL untuk Download PDF
             $table->string('pdf_file'); // Path untuk File PDF
             $table->timestamps();

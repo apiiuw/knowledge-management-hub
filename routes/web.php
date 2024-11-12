@@ -19,6 +19,7 @@ use App\Http\Controllers\PengaturanAkunController;
 Route::middleware([AdminMiddleware::class])->group(function () {
     Route::get('/admin-dashboard', [AdminDashboardController::class, 'index'])->name('admin.pages.dashboard');
     Route::get('/admin-buku', [AdminBukuController::class, 'index'])->name('admin.pages.buku');
+    Route::post('/admin/buku/{id}/update', [AdminBukuController::class, 'update'])->name('admin.buku.update');
     Route::get('/admin-buku/tambah', [AdminBukuController::class, 'create'])->name('admin.buku.create');
     Route::post('/admin/buku/store', [AdminBukuController::class, 'store'])->name('admin.buku.store');
     Route::get('/admin-buku/{id}/edit', [AdminBukuController::class, 'edit'])->name('admin.buku.edit');
