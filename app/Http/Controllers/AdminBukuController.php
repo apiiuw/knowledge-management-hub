@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class AdminBukuController extends Controller
 {
@@ -47,7 +48,43 @@ class AdminBukuController extends Controller
         ]);
     }
 
-
+    public function store(Request $request)
+    {
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'type' => 'required|string',
+            'release_year' => 'required|integer|min:1900|max:' . date('Y'),
+            'description' => 'required|string',
+            'keywords' => 'required|string|min:3',
+            'book_file' => 'required|mimes:pdf|max:2048',
+        ]);
+    
+        // Format path untuk `cover_image` dan `download_link`
+        $coverImage = 'path/to/cover_image.jpg';
+        $downloadLink = 'path/to/download.pdf';
+    
+        // Format untuk lokasi penyimpanan file PDF
+        $pdfFile = $request->file('book_file');
+        $pdfFileName = $pdfFile->getClientOriginalName();
+        $fileType = strtolower(str_replace(' ', '-', $request->type));
+        $pdfFilePath = 'assets/' . $fileType . '/' . $pdfFileName;
+        $pdfFile->move(public_path('assets/' . $fileType), $pdfFileName);
+    
+        // Menyimpan data ke database
+        Book::create([
+            'title' => $request->title,
+            'type' => $request->type,
+            'cover_image' => $coverImage,
+            'release_year' => $request->release_year,
+            'description' => $request->description,
+            'keywords' => $request->keywords, // Simpan langsung sebagai string
+            'download_link' => $downloadLink,
+            'pdf_file' => $pdfFilePath,
+        ]);
+    
+        return redirect()->route('admin.pages.buku')->with('success', 'Buku berhasil ditambahkan.');
+    }
+    
     public function edit($id)
     {
         $book = Book::findOrFail($id);

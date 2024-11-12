@@ -13,7 +13,7 @@
             setTimeout(() => {
                 const toast = document.getElementById('toast');
                 if (toast) toast.style.display = 'none';
-            }, 5000);
+            }, 3000);
         </script>
         @endif
         <script>
@@ -68,13 +68,17 @@
                                 Jawab Pertanyaan
                             </a>
 
-                            <form action="#" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus pertanyaan ini?');">
+                            <form action="{{ route('forum-diskusi.destroy', $discussion->id) }}" method="POST" onsubmit="return confirmDelete();">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="font-medium bg-red-500 hover:bg-red-600 px-3 py-2 rounded-md text-white">
-                                    Hapus
-                                </button>
+                                <button type="submit" class="font-medium bg-red-500 hover:bg-red-600 px-3 py-2 rounded-md text-white">Hapus</button>
                             </form>
+                            
+                            <script>
+                                function confirmDelete() {
+                                    return confirm('Apakah Anda yakin ingin menghapus pertanyaan ini? Tindakan ini tidak dapat dibatalkan.');
+                                }
+                            </script>
                             
                             <!-- Modal Dialog Lihat Jawaban -->
                             <dialog id="my_modal_3" class="modal">

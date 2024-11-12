@@ -20,6 +20,7 @@ Route::middleware([AdminMiddleware::class])->group(function () {
     Route::get('/admin-dashboard', [AdminDashboardController::class, 'index'])->name('admin.pages.dashboard');
     Route::get('/admin-buku', [AdminBukuController::class, 'index'])->name('admin.pages.buku');
     Route::get('/admin-buku/tambah', [AdminBukuController::class, 'create'])->name('admin.buku.create');
+    Route::post('/admin/buku/store', [AdminBukuController::class, 'store'])->name('admin.buku.store');
     Route::get('/admin-buku/{id}/edit', [AdminBukuController::class, 'edit'])->name('admin.buku.edit');
     Route::delete('/admin-buku/{id}', [AdminBukuController::class, 'destroy'])->name('admin.buku.destroy');
     Route::get('/admin-forum-diskusi', [AdminForumDiskusiController::class, 'index'])->name('admin.pages.forum-diskusi');

@@ -69,9 +69,9 @@ class AdminForumDiskusiController extends Controller
         $discussion = ForumDiscussion::find($id);
         if ($discussion) {
             $discussion->delete();
-            return redirect()->back()->with('success', 'Pertanyaan berhasil dihapus.');
+            return redirect()->route('admin.pages.forum-diskusi')->with('success', 'Pertanyaan berhasil dihapus.');
         }
-        return redirect()->back()->with('error', 'Pertanyaan tidak ditemukan.');
+        return redirect()->route('admin.pages.forum-diskusi')->with('error', 'Pertanyaan tidak ditemukan.');
     }
     
 }
