@@ -10,6 +10,7 @@ use App\Http\Controllers\MasukController;
 use App\Http\Controllers\AuthController;
 use Laravel\Socialite\Facades\Socialite;
 use App\Http\Middleware\AdminMiddleware;
+use App\Http\Middleware\LogVisitorNonAdmin; // Import Middleware Pencatatan Pengunjung
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\AdminBukuController;
 use App\Http\Controllers\AdminForumDiskusiController;
@@ -31,6 +32,7 @@ Route::middleware([AdminMiddleware::class])->group(function () {
     Route::get('/admin-pengaturan-akun', [PengaturanAkunController::class, 'index'])->name('admin.pages.pengaturan-akun');
 });
 
+// Rute umum untuk logout
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // Rute untuk redirect ke Google
@@ -41,22 +43,13 @@ Route::get('/auth/google/callback', [AuthController::class, 'handleGoogleCallbac
 
 Route::get('/masuk', [MasukController::class, 'index'])->name('masuk');
 
-// Rute untuk halaman utama
-Route::get('/', [BerandaController::class, 'index'])->name('beranda');
-
-// Rute untuk halaman tentang kami
-Route::get('/tentang-kami', [TentangKamiController::class, 'index'])->name('tentang-kami');
-
-// Rute untuk halaman forum diskusi
-Route::get('/forum-diskusi', [ForumDiskusiController::class, 'index'])->name('forum-diskusi');
-
-// Rute untuk halaman forum diskusi (tambah pertanyaan)
-Route::get('/tanya-admin', [ForumDiskusiController::class, 'add'])->name('forum-diskusi-tanya');
-
-// Rute untuk mengirim pertanyaan
-Route::post('/forum-diskusi', [ForumDiskusiController::class, 'store'])->name('forum-diskusi.store');
-
-// Rute untuk halaman kontak
-Route::get('/kontak', [KontakController::class, 'index'])->name('kontak');
-
-Route::get('/detail-buku/{id}', [DetailBukuController::class, 'index'])->name('detail-buku');
+// Rute dengan middleware LogVisitorNonAdmin untuk pencatatan pengunjung di halaman umum
+Route::middleware([LogVisitorNonAdmin::class])->group(function () {
+    Route::get('/', [BerandaController::class, 'index'])->name('beranda');
+    Route::get('/tentang-kami', [TentangKamiController::class, 'index'])->name('tentang-kami');
+    Route::get('/forum-diskusi', [ForumDiskusiController::class, 'index'])->name('forum-diskusi');
+    Route::get('/tanya-admin', [ForumDiskusiController::class, 'add'])->name('forum-diskusi-tanya');
+    Route::post('/forum-diskusi', [ForumDiskusiController::class, 'store'])->name('forum-diskusi.store');
+    Route::get('/kontak', [KontakController::class, 'index'])->name('kontak');
+    Route::get('/detail-buku/{id}', [DetailBukuController::class, 'index'])->name('detail-buku');
+});

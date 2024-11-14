@@ -1,6 +1,14 @@
 @extends('layouts.main')
 @section('container')
 
+{{-- GOOGLE ANALYTICS PAGE --}}
+<script>
+    gtag('event', 'page_view', {
+      'page_title': 'Detail Buku - {{ $book->title }}',
+      'page_path': '/detail-buku/{{ $book->id }}',
+    });
+</script>  
+
 <div class="bg-white w-full h-full pt-28 flex justify-center font-jakartaSans">
         <!-- Back Button -->
         <a href="/" class="absolute top-28 left-5 inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg shadow-lg hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-300 transition duration-200 transform hover:scale-105">
@@ -41,6 +49,9 @@
             <p class="text-gray-600 mb-4">
                 <strong>Kata Kunci:</strong> {{ $book->keywords }}
             </p>
+            {{-- <p class="text-gray-600 mb-4">
+                <strong>Jumlah Pengunjung:</strong> {{ $pageviews }}
+            </p> --}}
             <a href="{{ asset($book->pdf_file) }}" target="_blank" class="block text-center px-4 py-2 bg-blueJR text-white rounded hover:bg-blue-700 transition duration-200 mb-2">
                 Lihat Detail
             </a>

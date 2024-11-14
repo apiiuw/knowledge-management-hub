@@ -17,6 +17,16 @@
         {{-- ICON --}}
         <script src="https://kit.fontawesome.com/d7833bfda5.js" crossorigin="anonymous"></script>
 
+        {{-- GOOGLE ANALYTICS --}}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-KVY6ZMCFBK"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+    
+            gtag('config', 'G-KVY6ZMCFBK');
+        </script>        
+
         @vite('resources/css/app.css')
     </head>
     <body class="font-jakartaSans antialiased bg-white">

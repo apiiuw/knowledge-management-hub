@@ -1,72 +1,113 @@
 @extends('layouts.main')
 @section('container')
 
-<div class="bg-white w-full h-full pt-16 md:pt-20">
+<div class="bg-white w-full min-h-screen pt-16 md:pt-20">
 
-    <section class="bg-white dark:bg-gray-900">
+    <section class="bg-white">
         <div class="container px-6 py-10 mx-auto">
-            <h1 class="text-xl font-bold text-gray-800 lg:text-3xl dark:text-white uppercase">Tentang Kami <br><span class="underline decoration-blue-500 font-semibold">Knowledge Management Hub</span></h1>
+            <h1 class="text-xl font-bold text-gray-800 lg:text-3xl uppercase">Tentang Kami <br><span class=" font-semibold"><strong class="text-red-500">E</strong>dukasi <strong class="text-yellow-500">L</strong>alu <strong class="text-green-500">L</strong>intas</span></h1>
     
-            <p class="mt-4 text-md lg:text-lg text-gray-500 xl:mt-6 dark:text-gray-300">
-                Knowledge Management Hub adalah sebuah platform yang berisikan materi-materi softskill assessment berbasis website dalam lingkup Jasa Raharja Cabang DKI Jakarta.
+            <p class="mt-4 text-md lg:text-xl text-black xl:mt-6">
+                Edukasi Lalu Lintas adalah platform edukasi digital yang didesain khusus untuk siswa sekolah dasar (SD) hingga sekolah menengah pertama (SMP) sebagai sarana pembelajaran tentang keselamatan dan aturan dalam berlalu lintas. Dibuat oleh Jasa Raharja Cabang DKI Jakarta, platform ini menyediakan beragam materi pembelajaran interaktif yang menarik dan mudah dipahami oleh anak-anak dan remaja. Kami percaya bahwa pendidikan tentang keselamatan berkendara dan kepatuhan berlalu lintas sejak dini dapat menumbuhkan generasi muda yang lebih peduli dan disiplin di jalan raya.
             </p>
-    
+            
+            <p class="mt-4 text-md lg:text-xl text-black xl:mt-6">
+                Melalui Edukasi Lalu Lintas, siswa dapat mempelajari hal-hal penting seperti:
+                <ul class="mt-2 list-disc list-inside text-black">
+                    <li>Aturan Dasar Lalu Lintas: Mengenal rambu-rambu lalu lintas, lampu lalu lintas, dan marka jalan.</li>
+                    <li>Etika Berkendara yang Baik: Memahami pentingnya menghargai pengguna jalan lain, termasuk pejalan kaki dan pengendara sepeda.</li>
+                    <li>Keselamatan di Jalan: Cara menyeberang yang benar, pentingnya mengenakan helm, dan tips menjaga keamanan diri saat berada di jalan raya.</li>
+                </ul>
+            </p>
+
+            <p class="mt-4 text-md lg:text-xl text-black xl:mt-6">
+                Dengan adanya Edukasi Lalu Lintas, Jasa Raharja berharap dapat membantu para siswa SD dan SMP untuk menjadi generasi yang lebih sadar akan pentingnya keselamatan di jalan dan mematuhi aturan lalu lintas sejak usia dini. Mari belajar bersama dan menjadi bagian dari masyarakat yang peduli keselamatan jalan raya!
+            </p>
+
             <div class="grid grid-cols-1 gap-8 mt-8 xl:mt-12 xl:gap-12 md:grid-cols-2 xl:grid-cols-3">
-                <div class="p-8 space-y-3 border-2 border-blue-400 dark:border-blue-300 rounded-xl">
-                    <span class="inline-block text-blue-500 dark:text-blue-400">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z" />
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.879 16.121A3 3 0 1012.015 11L11 14H9c0 .768.293 1.536.879 2.121z" />
-                        </svg>
+                <div class="p-8 space-y-3 border-2 border-blue-400 rounded-xl transition duration-300 ease-in-out hover:scale-105">
+                    <span class="inline-block text-blue-500">
+                        <i class="fa-solid fa-s fa-2xl text-black"></i>
                     </span>
     
-                    <h1 class="text-xl font-semibold text-gray-700 capitalize dark:text-white">elegant Dark Mode</h1>
+                    <h1 class="text-xl font-semibold text-gray-700 capitalize">Spesifik</h1>
     
-                    <p class="text-gray-500 dark:text-gray-300">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident ab nulla quod dignissimos vel non corrupti doloribus voluptatum eveniet
+                    <p class="text-gray-500">
+                        Meningkatkan kesadaran siswa SD dan SMP di Dusun Karangrejek akan pentingnya keselamatan lalu lintas serta mengurangi angka kecelakaan di wilayah tersebut.
                     </p>
-    
-                    <a href="#" class="inline-flex p-2 text-blue-500 capitalize transition-colors duration-300 transform bg-blue-100 rounded-full rtl:-scale-x-100 dark:bg-blue-500 dark:text-white hover:underline hover:text-blue-600 dark:hover:text-blue-500">
+                    <a href="#" class="inline-flex p-2 text-blue-500 capitalize transition-colors duration-300 transform bg-blue-100 rounded-full rtl:-scale-x-100 hover:underline hover:text-blue-600">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                     </a>
                 </div>
     
-                <div class="p-8 space-y-3 border-2 border-blue-400 dark:border-blue-300 rounded-xl">
-                    <span class="inline-block text-blue-500 dark:text-blue-400">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z" />
-                        </svg>
+                <div class="p-8 space-y-3 border-2 border-blue-400 rounded-xl transition duration-300 ease-in-out hover:scale-105">
+                    <span class="inline-block text-blue-500">
+                        <i class="fa-solid fa-m fa-2xl text-black"></i>
                     </span>
     
-                    <h1 class="text-xl font-semibold text-gray-700 capitalize dark:text-white">Easy to customiztions</h1>
+                    <h1 class="text-xl font-semibold text-gray-700 capitalize">Meassurable</h1>
     
-                    <p class="text-gray-500 dark:text-gray-300">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident ab nulla quod dignissimos vel non corrupti doloribus voluptatum eveniet
+                    <p class="text-gray-500">
+                        Program ini diharapkan mampu mengurangi pelanggaran lalu lintas yang melibatkan anak usia sekolah serta menurunkan angka kecelakaan hingga 50%.
                     </p>
     
-                    <a href="#" class="inline-flex p-2 text-blue-500 capitalize transition-colors duration-300 transform bg-blue-100 rounded-full rtl:-scale-x-100 dark:bg-blue-500 dark:text-white hover:underline hover:text-blue-600 dark:hover:text-blue-500">
+                    <a href="#" class="inline-flex p-2 text-blue-500 capitalize transition-colors duration-300 transform bg-blue-100 rounded-full rtl:-scale-x-100 hover:underline hover:text-blue-600">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                     </a>
                 </div>
     
-                <div class="p-8 space-y-3 border-2 border-blue-400 dark:border-blue-300 rounded-xl">
-                    <span class="inline-block text-blue-500 dark:text-blue-400">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
-                        </svg>
+                <div class="p-8 space-y-3 border-2 border-blue-400 rounded-xl transition duration-300 ease-in-out hover:scale-105">
+                    <span class="inline-block text-blue-500">
+                        <i class="fa-solid fa-a fa-2xl text-black"></i>
                     </span>
     
-                    <h1 class="text-xl font-semibold text-gray-700 capitalize dark:text-white">Simple & clean designs</h1>
+                    <h1 class="text-xl font-semibold text-gray-700 capitalize">Achiveable</h1>
     
-                    <p class="text-gray-500 dark:text-gray-300">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident ab nulla quod dignissimos vel non corrupti doloribus voluptatum eveniet
+                    <p class="text-gray-500">
+                        Program ini didukung dengan materi ajar tentang keselamatan lalu lintas untuk SD, SMP, dan SMA yang telah terdaftar di Dikbud dan dapat diakses secara daring.
                     </p>
     
-                    <a href="#" class="inline-flex p-2 text-blue-500 capitalize transition-colors duration-300 transform bg-blue-100 rounded-full rtl:-scale-x-100 dark:bg-blue-500 dark:text-white hover:underline hover:text-blue-600 dark:hover:text-blue-500">
+                    <a href="#" class="inline-flex p-2 text-blue-500 capitalize transition-colors duration-300 transform bg-blue-100 rounded-full rtl:-scale-x-100 hover:underline hover:text-blue-600">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </a>
+                </div>
+
+                <div class="p-8 space-y-3 border-2 border-blue-400 rounded-xl transition duration-300 ease-in-out hover:scale-105">
+                    <span class="inline-block text-blue-500">
+                        <i class="fa-solid fa-r fa-2xl text-black"></i>
+                    </span>
+    
+                    <h1 class="text-xl font-semibold text-gray-700 capitalize">Relevan</h1>
+    
+                    <p class="text-gray-500">
+                        Peningkatan pengetahuan dan keterlibatan dalam keselamatan lalu lintas dapat mengurangi angka kecelakaan, yang merupakan salah satu target utama perusahaan.
+                    </p>
+    
+                    <a href="#" class="inline-flex p-2 text-blue-500 capitalize transition-colors duration-300 transform bg-blue-100 rounded-full rtl:-scale-x-100 hover:underline hover:text-blue-600">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </a>
+                </div>
+
+                <div class="p-8 space-y-3 border-2 border-blue-400 rounded-xl transition duration-300 ease-in-out hover:scale-105">
+                    <span class="inline-block text-blue-500">
+                        <i class="fa-solid fa-t fa-2xl text-black"></i>
+                    </span>
+    
+                    <h1 class="text-xl font-semibold text-gray-700 capitalize">Time</h1>
+    
+                    <p class="text-gray-500">
+                        Dalam waktu tiga tahun, program ini diharapkan dapat mencapai tujuan “zero accident”.
+                    </p>
+    
+                    <a href="#" class="inline-flex p-2 text-blue-500 capitalize transition-colors duration-300 transform bg-blue-100 rounded-full rtl:-scale-x-100 hover:underline hover:text-blue-600">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>

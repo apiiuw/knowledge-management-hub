@@ -19,7 +19,7 @@
           <div>
               <button type="button" class="flex text-sm bg-white rounded-full focus:ring-4 focus:ring-gray-300" aria-expanded="false" data-dropdown-toggle="dropdown-user">
                   <span class="sr-only">Open user menu</span>
-                  <img class="w-8 h-8 rounded-full" src="{{ Auth::user()->profile_picture ?? 'default-avatar-url.jpg' }}" alt="user photo">
+                  <img class="w-8 h-8 rounded-full" src="{{ Auth::user()->profile_picture ?? 'assets/images/profile/Default User.png' }}" alt="user photo">
               </button>
           </div>
           <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow" id="dropdown-user">
