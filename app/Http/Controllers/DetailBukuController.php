@@ -6,6 +6,9 @@ use App\Models\Book;
 use Google_Client;
 use Google_Service_AnalyticsData;
 use Google_Service_AnalyticsData_RunReportRequest;
+use App\Models\Visitor;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class DetailBukuController extends Controller
@@ -18,6 +21,13 @@ class DetailBukuController extends Controller
         // Dapatkan jumlah tampilan total dari Google Analytics
         $pageviews = $this->getGoogleAnalyticsTotalPageViews($book->id);
 
+                // Simpan kunjungan baru di tabel visitors
+        Visitor::create([
+            'book_id' => $id, // Menyimpan ID buku yang dibuka
+            'visit_date' => Carbon::now(), // Menyimpan waktu kunjungan
+            'page_name' => 'detail-buku', // Menyimpan nama halaman
+        ]);
+
         // Return the view with book data and pageviews
         return view('pages.detail-buku.index', [
             'active' => 'beranda',
@@ -29,19 +39,12 @@ class DetailBukuController extends Controller
 
     public function show($id)
     {
-        // Fetch the book by ID or return a 404 error if not found
+        // Ambil data buku berdasarkan ID
         $book = Book::findOrFail($id);
-
-        // Increase the view count in the database (optional, for local tracking)
-        $book->view_count += 1;
-        $book->save();
-
-        // Fetch pageviews from Google Analytics
-        $pageviews = $this->getGoogleAnalyticsTotalPageViews($book->id);
-
-        // Send book data and pageviews to the view
-        return view('pages.detail-buku.index', compact('book', 'pageviews'));
-    }
+        
+        // Kirim data buku ke view detail buku
+        return view('detail-buku', compact('book'));
+    }    
 
     /**
      * Get total page views for a specific book from Google Analytics

@@ -13,5 +13,5 @@ class Visitor extends Model
     protected $table = 'visitors';
 
     // Kolom yang dapat diisi secara massal
-    protected $fillable = ['page', 'visit_date'];
+    protected $fillable = ['page', 'visit_date', 'book_id', 'page_name'];
 }

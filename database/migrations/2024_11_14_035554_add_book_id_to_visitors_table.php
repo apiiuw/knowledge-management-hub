@@ -12,14 +12,15 @@ return new class extends Migration
     public function up()
     {
         Schema::table('visitors', function (Blueprint $table) {
-            $table->string('page_name')->nullable();
+            $table->unsignedBigInteger('book_id')->nullable();  // Tambahkan kolom book_id
         });
     }
     
     public function down()
     {
         Schema::table('visitors', function (Blueprint $table) {
-            $table->dropColumn('page_name');
+            $table->dropColumn('book_id');  // Menghapus kolom book_id jika rollback
         });
-    }    
+    }
+    
 };
