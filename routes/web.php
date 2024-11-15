@@ -14,7 +14,7 @@ use App\Http\Middleware\LogVisitorNonAdmin;
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\AdminBukuController;
 use App\Http\Controllers\AdminForumDiskusiController;
-use App\Http\Controllers\PengaturanAkunController;
+use App\Http\Controllers\AdminPengaturanAkunController;
 
 // Rute untuk halaman dashboard admin (hanya untuk admin yang ditentukan)
 Route::middleware(['auth', AdminMiddleware::class])->group(function () {
@@ -29,7 +29,9 @@ Route::middleware(['auth', AdminMiddleware::class])->group(function () {
     Route::post('/forum/update-jawaban/{id}', [AdminForumDiskusiController::class, 'updateJawabanDanStatus'])->name('forum.updateJawabanDanStatus');
     Route::patch('/forum-diskusi/{id}/update-answer', [AdminForumDiskusiController::class, 'updateAnswer'])->name('forum-diskusi.update-answer');
     Route::delete('/forum-diskusi/{id}', [AdminForumDiskusiController::class, 'destroy'])->name('forum-diskusi.destroy');
-    Route::get('/admin-pengaturan-akun', [PengaturanAkunController::class, 'index'])->name('admin.pages.pengaturan-akun');
+    Route::get('/admin-pengaturan-akun', [AdminPengaturanAkunController::class, 'index'])->name('admin.pages.pengaturan-akun');
+    Route::post('/admin/pengaturan-akun/update', [AdminPengaturanAkunController::class, 'update'])->name('profile.update');
+    Route::patch('/admin/pengaturan-akun/change-password', [AdminPengaturanAkunController::class, 'changePassword'])->name('profile.changePassword');
 });
 
 // Rute umum untuk logout

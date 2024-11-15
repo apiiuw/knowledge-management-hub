@@ -7,7 +7,7 @@
         <div class="flex items-center md:order-2 space-x-3">
             <button type="button" class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
                 <span class="sr-only">Open user menu</span>
-                <img class="w-10 md:w-12 h-10 md:h-12 rounded-full" src="{{ asset('assets/images/profile/Default User.png') }}" alt="user photo">
+                <img class="w-10 md:w-12 h-10 md:h-12 rounded-full" src="{{ Storage::url($user->profile_picture ?? 'assets/images/profile/Default User.png') }}" alt="user photo">
             </button>
             <!-- Dropdown menu -->
             <div class="hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow" id="user-dropdown">
