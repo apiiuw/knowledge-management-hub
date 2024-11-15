@@ -239,7 +239,7 @@
                     @foreach ($books as $book)
                         <div class="w-full lg:w-72 bg-white border border-gray-200 rounded-lg shadow-md shadow-black/30 flex flex-col">
                             <a href="/detail-buku/{{ $book->id }}">
-                                <img id="pdf-cover-{{ $book->id }}" class="rounded-t-lg w-full aspect-square lg:w-72 lg:h-72 object-cover" src="{{ asset('assets/images/pages/beranda/List-Buku/contoh1.jpg') }}" alt="Cover for {{ $book->title }}" />
+                                <img id="pdf-cover-{{ $book->id }}" class="rounded-t-lg w-full aspect-square lg:w-72 lg:h-72 object-cover skeleton"/>
                             </a>
                             <div class="p-5 flex flex-col flex-grow">
                                 <a href="/detail-buku/{{ $book->id }}">

@@ -18,6 +18,9 @@
         {{-- ICON --}}
         <script src="https://kit.fontawesome.com/d7833bfda5.js" crossorigin="anonymous"></script>
 
+        {{-- TOAST --}}
+        <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
         {{-- TAILWIND CSS --}}
         <script src="https://cdn.tailwindcss.com"></script>
         <script>
