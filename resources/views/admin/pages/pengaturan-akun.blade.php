@@ -74,7 +74,7 @@
 <!-- Modal Ganti Password -->
 <div id="changePasswordModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
     <div class="bg-white p-6 rounded-lg w-96">
-        <h3 class="text-xl font-semibold mb-4">Ganti Password</h3>
+        <h3 class="text-xl text-black font-semibold mb-4">Ganti Password</h3>
         <form method="POST" action="{{ route('profile.changePassword') }}">
             @csrf
             @method('PATCH')

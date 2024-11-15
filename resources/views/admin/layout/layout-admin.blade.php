@@ -14,7 +14,9 @@
 
         {{-- FONT --}}
         <link href="https://fonts.cdnfonts.com/css/neck-l-sans" rel="stylesheet">
-
+        <link href="https://fonts.cdnfonts.com/css/new-sosis" rel="stylesheet">
+        <link href="https://fonts.cdnfonts.com/css/comiccomoc" rel="stylesheet">
+        
         {{-- ICON --}}
         <script src="https://kit.fontawesome.com/d7833bfda5.js" crossorigin="anonymous"></script>
 

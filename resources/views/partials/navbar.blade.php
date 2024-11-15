@@ -2,7 +2,8 @@
     <div class="bg-blueJR h-2"></div>
     <div class="w-full mx-auto flex flex-wrap items-center justify-between p-4">
         <a href="/" class="flex items-center space-x-3 rtl:space-x-reverse">
-            <img src="{{ asset('assets/images/logo/Jasa Raharja Utama dalam pelindungan, prima dalam pelayanan.png') }}" class="h-12" alt="Flowbite Logo" />
+            <img src="{{ asset('assets/images/logo/Jasa Raharja Logo Member of IFG.png') }}" class="h-20 -my-3" alt="Logo Jasa Raharja" />
+            <span class="hidden md:block self-center text-xl font-comicComoc md:text-3xl whitespace-nowrap ml-2 text-blueJR"><span class="text-red-500">E</span>du<span class="text-green-500">L</span>alu<span class="text-yellow-500">L</span>intas.com</span>
         </a>
         <div class="flex items-center md:order-2 space-x-3">
             <button type="button" class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">

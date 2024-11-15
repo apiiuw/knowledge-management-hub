@@ -13,6 +13,8 @@ export default {
         },
         fontFamily: {
           jakartaSans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          newSosis: ['"New Sosis"', 'sans-serif'],
+          comicComoc: ['"Comiccomoc"', 'sans-serif'],
         },
       },
     },

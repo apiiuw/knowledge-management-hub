@@ -10,8 +10,8 @@
           </svg>
        </button>
       <a href="/admin-dashboard" class="flex ms-2 md:me-24">
-         <img src="{{ asset('assets/images/logo/Jasa Raharja Utama dalam pelindungan, prima dalam pelayanan.png') }}" class="h-12" alt="Flowbite Logo" />
-         <span class="hidden md:block self-center text-xl font-semibold sm:text-2xl whitespace-nowrap ml-2 text-black"><span class="text-red-500">E</span>du<span class="text-green-500">L</span>alu<span class="text-yellow-500">L</span>intas.com</span>
+        <img src="{{ asset('assets/images/logo/Jasa Raharja Logo Member of IFG.png') }}" class="h-20 -my-3" alt="Logo Jasa Raharja" />
+        <span class="hidden md:block self-center text-xl font-comicComoc md:text-3xl whitespace-nowrap ml-2 text-blueJR"><span class="text-red-500">E</span>du<span class="text-green-500">L</span>alu<span class="text-yellow-500">L</span>intas.com</span>
       </a>
     </div>
     <div class="flex items-center">
