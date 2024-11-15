@@ -19,7 +19,7 @@
           <div>
               <button type="button" class="flex text-sm bg-white rounded-full focus:ring-4 focus:ring-gray-300" aria-expanded="false" data-dropdown-toggle="dropdown-user">
                   <span class="sr-only">Open user menu</span>
-                  <img class="w-10 h-10 rounded-full" src="{{ Storage::url($user->profile_picture ?? 'assets/images/profile/Default User.png') }}" alt="user photo">
+                  <img class="w-10 md:w-12 h-10 md:h-12 rounded-full" src="{{ Storage::url($user->profile_picture ?? 'assets/images/profile/Default User.png') }}" alt="user photo">
               </button>
           </div>
           <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow" id="dropdown-user">
@@ -87,6 +87,14 @@
             <span class="flex-1 ms-3 whitespace-nowrap {{ $active === 'admin-pengaturan-akun' ? 'text-black' : 'text-gray-500' }}">Pengaturan Akun</span>
         </a>
       </li>
+      <li>
+        <a href="{{ route('beranda') }}" class="flex items-center p-2
+            {{ $active === 'beranda' ? 'text-black bg-gray-200 rounded' : 'text-gray-500 hover:bg-gray-100' }}
+            group">
+            <i class="fa-solid fa-house-chimney {{ $active === 'beranda' ? 'text-black' : 'text-gray-500' }}"></i>
+            <span class="ms-3 {{ $active === 'beranda' ? 'text-black' : 'text-gray-500' }}">Tampilan User</span>
+        </a>
+     </li>
     </ul>
  </div>
 </aside>

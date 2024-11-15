@@ -6,6 +6,7 @@ use App\Http\Controllers\TentangKamiController;
 use App\Http\Controllers\ForumDiskusiController;
 use App\Http\Controllers\KontakController;
 use App\Http\Controllers\DetailBukuController;
+use App\Http\Controllers\PengaturanAkunController;
 use App\Http\Controllers\MasukController;
 use App\Http\Controllers\BuatAkunController;
 use App\Http\Controllers\AuthController;
@@ -61,4 +62,7 @@ Route::middleware(['auth', LogVisitorNonAdmin::class])->group(function () {
     Route::post('/forum-diskusi', [ForumDiskusiController::class, 'store'])->name('forum-diskusi.store');
     Route::get('/kontak', [KontakController::class, 'index'])->name('kontak');
     Route::get('/detail-buku/{id}', [DetailBukuController::class, 'index'])->name('detail-buku');
+    Route::get('/pengaturan-akun', [PengaturanAkunController::class, 'index'])->name('pengaturan-akun');
+    Route::post('pengaturan-akun/update', [PengaturanAkunController::class, 'update'])->name('pengaturan-akun.update');
+    Route::patch('pengaturan-akun/password', [PengaturanAkunController::class, 'changePassword'])->name('pengaturan-akun.changePassword');
 });

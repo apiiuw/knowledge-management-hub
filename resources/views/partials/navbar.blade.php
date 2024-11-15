@@ -17,7 +17,10 @@
                         <span class="block text-sm text-gray-500 truncate">{{ Auth::user()->email }}</span> <!-- Menampilkan email pengguna -->
                     </div>
                     <ul class="py-2" aria-labelledby="user-menu-button">
-                        <li><a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Pengaturan</a></li>
+                        @if(Auth::user()->email === 'rafirizqallahandilla@gmail.com') <!-- Mengecek jika admin yang login -->
+                            <li><a href="{{ route('admin.pages.dashboard') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Dashboard Admin</a></li> <!-- Menu Dashboard Admin -->
+                        @endif
+                        <li><a href="{{ route('pengaturan-akun') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Pengaturan Akun</a></li>
                         <li>
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
@@ -32,7 +35,7 @@
                         <a href="/masuk" class="block px-4 py-2 text-sm text-blue-500 hover:bg-gray-100">Masuk</a>
                     </div>
                 @endauth
-            </div>                 
+            </div>                          
             <button data-collapse-toggle="navbar-user" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200" aria-controls="navbar-user" aria-expanded="false">
                 <span class="sr-only">Open main menu</span>
                 <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">

@@ -1,32 +1,126 @@
 @extends('layouts.main')
+
 @section('container')
+<div class="p-4 min-h-screen">
+   <div class="p-4 rounded-lg mt-20 mx-auto w-full text-black">
+      <h2 class="text-2xl text-center font-bold">PENGATURAN AKUN</h2>
+   
+      @if(session('success'))
+          <div class="bg-green-500 text-white p-2 mt-4 rounded text-center">
+              {{ session('success') }}
+          </div>
+      @endif
+   
+      @if($errors->any())
+          <div class="bg-red-500 text-white p-2 mt-4 rounded text-center">
+              @foreach($errors->all() as $error)
+                  <p>{{ $error }}</p>
+              @endforeach
+          </div>
+      @endif
+   
+      <!-- Menampilkan data pengguna -->
+      <div class="mt-6 text-center">
+          <img src="{{ $user->profile_picture ? Storage::url($user->profile_picture) : asset('assets/images/profile/Default User.png') }}" alt="Profile Picture" class="w-32 h-32 rounded-full mx-auto">
+          <p class="text-lg mt-2">{{ $user->name }}</p>
+          <p class="text-sm text-gray-500">{{ $user->email }}</p>
+      </div>
+   
+      <!-- Tombol untuk membuka modal Update Profil -->
+      <div class="mt-6 text-center">
+          <button class="px-4 py-2 bg-blue-600 text-white rounded-md" id="openUpdateProfileModal">Update Profil</button>
+      </div>
+   
+      <!-- Tombol untuk membuka modal Ganti Password -->
+      <div class="mt-4 text-center">
+          <button class="px-4 py-2 bg-blue-600 text-white rounded-md" id="openChangePasswordModal">Ganti Password</button>
+      </div>
+   </div>
+   
+</div>
 
-<div class="bg-white w-full h-full pt-28 px-10">
-    <h1 class="text-2xl md:text-3xl font-bold font-jakartaSans text-blueJR flex justify-center mb-8">INFORMASI KONTAK</h1>
-    
-    <!-- Wrapper Informasi Perusahaan dan Peta Lokasi -->
-    <div class="h-[calc(100vh-7rem)] flex flex-col md:flex-row justify-between items-start mb-8">
-        
-        <!-- Kontak Perusahaan -->
-        <div class="w-full md:w-1/2 h-1/2 md:h-full mb-8 md:mb-0 text-blueJR font-jakartaSans flex flex-col justify-center">
-            <h2 class="text-xl md:text-2xl font-semibold mb-4">Perusahaan</h2>
-            <p><strong>Nama Perusahaan:</strong> PT. Jasa Raharja (Persero) Cabang DKI Jakarta</p>
-            <p><strong>Nomor Telepon:</strong> (021) 21012904</p>
-            <p><strong>Alamat:</strong> Jl. Jatinegara Timur No.107, RT.1/RW.2, Bali Mester, Kecamatan Jatinegara, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta 13310</p>
-        </div>
+<!-- Modal Update Profil -->
+<div id="updateProfileModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
+    <div class="bg-white p-6 rounded-lg w-96">
+        <h3 class="text-xl text-black font-semibold mb-4">Update Profil</h3>
+        <form action="{{ route('pengaturan-akun.update') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            <div>
+                <label for="name" class="block text-sm font-medium text-gray-700">Nama</label>
+                <input type="text" name="name" id="name" value="{{ old('name', $user->name) }}" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+            </div>
 
-        <!-- Peta Lokasi -->
-        <div class="w-full md:w-1/2 h-1/2 md:h-full flex justify-center items-center">
-            <iframe 
-                class="rounded-3xl w-full h-full" 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.301843032989!2d106.86564547480322!3d-6.223873393764188!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f37853ab699f%3A0x178e1c4e01d774a9!2sPT%20Jasa%20Raharja%20Cabang%20DKI%20Jakarta!5e0!3m2!1sen!2sid!4v1730174443000!5m2!1sen!2sid" 
-                style="border:0;" 
-                allowfullscreen="" 
-                loading="lazy" 
-                referrerpolicy="no-referrer-when-downgrade">
-            </iframe>
-        </div>
+            <div class="mt-4">
+               <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+               <input type="email" name="email" id="email" value="{{ old('email', $user->email) }}" 
+                      class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" 
+                      readonly>
+           </div>           
+
+            <div class="mt-4">
+                <label for="profile_picture" class="block text-sm font-medium text-gray-700">Foto Profil</label>
+                <input type="file" name="profile_picture" id="profile_picture" class="mt-1 block w-full text-sm text-gray-500">
+            </div>
+
+            <div class="mt-6">
+                <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-md">Update Profil</button>
+                <button type="button" id="closeUpdateProfileModal" class="px-4 py-2 bg-gray-600 text-white rounded-md ml-2">Tutup</button>
+            </div>
+        </form>
     </div>
 </div>
 
+<!-- Modal Ganti Password -->
+<div id="changePasswordModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
+    <div class="bg-white p-6 rounded-lg w-96">
+        <h3 class="text-xl font-semibold mb-4">Ganti Password</h3>
+        <form method="POST" action="{{ route('pengaturan-akun.changePassword') }}">
+            @csrf
+            @method('PATCH')
+
+            <div class="mb-4">
+                <label for="new_password" class="block text-sm font-medium text-gray-700">Password Baru</label>
+                <input type="password" id="new_password" name="new_password" class="mt-1 block w-full" required>
+            </div>
+
+            <div class="mb-4">
+                <label for="new_password_confirmation" class="block text-sm font-medium text-gray-700">Konfirmasi Password Baru</label>
+                <input type="password" id="new_password_confirmation" name="new_password_confirmation" class="mt-1 block w-full" required>
+            </div>
+
+            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md">Ganti Password</button>
+            <button type="button" id="closeChangePasswordModal" class="px-4 py-2 bg-gray-600 text-white rounded-md ml-2">Tutup</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    // Mendapatkan elemen modal dan tombol
+    const updateProfileModal = document.getElementById('updateProfileModal');
+    const changePasswordModal = document.getElementById('changePasswordModal');
+    const openUpdateProfileModal = document.getElementById('openUpdateProfileModal');
+    const openChangePasswordModal = document.getElementById('openChangePasswordModal');
+    const closeUpdateProfileModal = document.getElementById('closeUpdateProfileModal');
+    const closeChangePasswordModal = document.getElementById('closeChangePasswordModal');
+
+    // Membuka modal Update Profil
+    openUpdateProfileModal.addEventListener('click', function() {
+        updateProfileModal.classList.remove('hidden');
+    });
+
+    // Membuka modal Ganti Password
+    openChangePasswordModal.addEventListener('click', function() {
+        changePasswordModal.classList.remove('hidden');
+    });
+
+    // Menutup modal Update Profil
+    closeUpdateProfileModal.addEventListener('click', function() {
+        updateProfileModal.classList.add('hidden');
+    });
+
+    // Menutup modal Ganti Password
+    closeChangePasswordModal.addEventListener('click', function() {
+        changePasswordModal.classList.add('hidden');
+    });
+</script>
 @endsection
