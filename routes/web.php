@@ -7,6 +7,7 @@ use App\Http\Controllers\ForumDiskusiController;
 use App\Http\Controllers\KontakController;
 use App\Http\Controllers\DetailBukuController;
 use App\Http\Controllers\MasukController;
+use App\Http\Controllers\BuatAkunController;
 use App\Http\Controllers\AuthController;
 use Laravel\Socialite\Facades\Socialite;
 use App\Http\Middleware\AdminMiddleware;
@@ -45,6 +46,11 @@ Route::get('/auth/google/callback', [AuthController::class, 'handleGoogleCallbac
 
 // Rute halaman login
 Route::get('/masuk', [MasukController::class, 'index'])->name('login');
+Route::post('masuk', [MasukController::class, 'login'])->name('masuk.login');
+
+// Rute halaman buat akun
+Route::get('/buat-akun', [BuatAkunController::class, 'index'])->name('register');
+Route::post('register', [BuatAkunController::class, 'store'])->name('register.store');
 
 // Rute dengan middleware LogVisitorNonAdmin untuk pencatatan pengunjung di halaman umum
 Route::middleware(['auth', LogVisitorNonAdmin::class])->group(function () {
