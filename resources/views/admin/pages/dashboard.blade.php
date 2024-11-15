@@ -141,8 +141,8 @@
         const toastMessage = document.getElementById('toastMessage');
         if (toastMessage) {
             setTimeout(function() {
-                toastMessage.classList.add('hidden'); // Menyembunyikan toast setelah 3 detik
-            }, 3000); // Toast hilang setelah 3 detik
+                toastMessage.classList.add('hidden');
+            }, 3000); 
         }
     });
 </script>

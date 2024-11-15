@@ -10,14 +10,14 @@ use App\Http\Controllers\MasukController;
 use App\Http\Controllers\AuthController;
 use Laravel\Socialite\Facades\Socialite;
 use App\Http\Middleware\AdminMiddleware;
-use App\Http\Middleware\LogVisitorNonAdmin; // Import Middleware Pencatatan Pengunjung
+use App\Http\Middleware\LogVisitorNonAdmin;
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\AdminBukuController;
 use App\Http\Controllers\AdminForumDiskusiController;
 use App\Http\Controllers\PengaturanAkunController;
 
-// Rute untuk halaman dashboard admin
-Route::middleware([AdminMiddleware::class])->group(function () {
+// Rute untuk halaman dashboard admin (hanya untuk admin yang ditentukan)
+Route::middleware(['auth', AdminMiddleware::class])->group(function () {
     Route::get('/admin-dashboard', [AdminDashboardController::class, 'index'])->name('admin.pages.dashboard');
     Route::get('/admin-buku', [AdminBukuController::class, 'index'])->name('admin.pages.buku');
     Route::post('/admin/buku/{id}/update', [AdminBukuController::class, 'update'])->name('admin.buku.update');
@@ -41,10 +41,11 @@ Route::get('/auth/google', [AuthController::class, 'redirectToGoogle'])->name('a
 // Rute untuk menangani callback dari Google
 Route::get('/auth/google/callback', [AuthController::class, 'handleGoogleCallback']);
 
-Route::get('/masuk', [MasukController::class, 'index'])->name('masuk');
+// Rute halaman login
+Route::get('/masuk', [MasukController::class, 'index'])->name('login');
 
 // Rute dengan middleware LogVisitorNonAdmin untuk pencatatan pengunjung di halaman umum
-Route::middleware([LogVisitorNonAdmin::class])->group(function () {
+Route::middleware(['auth', LogVisitorNonAdmin::class])->group(function () {
     Route::get('/', [BerandaController::class, 'index'])->name('beranda');
     Route::get('/tentang-kami', [TentangKamiController::class, 'index'])->name('tentang-kami');
     Route::get('/forum-diskusi', [ForumDiskusiController::class, 'index'])->name('forum-diskusi');

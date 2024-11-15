@@ -7,45 +7,54 @@ use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Log;
 
 class AuthController extends Controller
 {
-    // Method untuk mengarahkan pengguna ke Google untuk login
+    // Define admin emails
+    private $adminEmails = [
+        'rafirizqallahandilla@gmail.com',
+        'anotheradmin@example.com' // Replace with the second admin email
+    ];
+
+    // Method to redirect user to Google login
     public function redirectToGoogle()
     {
         return Socialite::driver('google')->redirect();
     }
 
-    // Method untuk menangani callback dari Google
+    // Handle callback from Google
     public function handleGoogleCallback()
     {
         $user = Socialite::driver('google')->user();
-    
-        // Cek apakah email pengguna adalah yang diizinkan
-        if ($user->getEmail() === 'rafirizqallahandilla@gmail.com') {
-            \Log::info('User Avatar URL: ' . $user->getAvatar()); // Log URL avatar untuk verifikasi
-    
-            $authUser = User::firstOrCreate(
-                ['email' => $user->getEmail()],
-                [
-                    'name' => $user->getName(),
-                    'password' => Hash::make(uniqid()),
-                    'profile_picture' => $user->getAvatar(), // Menyimpan URL foto profil
-                ]
-            );
-    
-            Auth::login($authUser);
-    
+
+        // Check if the user's email is one of the admins
+        $isAdmin = in_array($user->getEmail(), $this->adminEmails);
+
+        // Retrieve or create user in database
+        $authUser = User::firstOrCreate(
+            ['email' => $user->getEmail()],
+            [
+                'name' => $user->getName(),
+                'password' => Hash::make(uniqid()), // Random password
+                'profile_picture' => $user->getAvatar(), // Save profile picture URL
+                'is_admin' => $isAdmin
+            ]
+        );
+
+        Auth::login($authUser);
+
+        // Redirect based on role
+        if ($isAdmin) {
             return redirect()->route('admin.pages.dashboard');
         } else {
-            return redirect()->route('masuk')->with('error', 'Akses ditolak. Hanya admin yang dapat masuk.');
+            return redirect()->route('beranda');
         }
-    }          
-    
+    }
+
+    // Logout method
     public function logout(Request $request)
     {
         Auth::logout();
-        return redirect('/masuk'); // Redirect ke halaman masuk setelah logout
+        return redirect('/masuk'); // Redirect to login page after logout
     }
 }

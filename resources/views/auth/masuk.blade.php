@@ -45,7 +45,7 @@
 
         <div class="h-96 flex items-center justify-center bg-white">
             <div class="relative">
-                <div class="absolute -top-2 -left-2 -right-2 -bottom-2 rounded-lg bg-gradient-to-r from-blueJR via-white to-red-500 shadow-lg animate-pulse"></div>
+                <div class="absolute -top-2 -left-2 -right-2 -bottom-2 rounded-lg bg-gradient-to-r bg-blueJR shadow-lg animate-pulse"></div>
                 @if(session('error'))
                     <div class="alert alert-danger">
                         {{ session('error') }}
@@ -57,7 +57,7 @@
                         <input class="w-full h-12 border border-gray-800 px-3 rounded-lg" placeholder="Email" id="" name="" type="text">
                         <input class="w-full h-12 border border-gray-800 px-3 rounded-lg" placeholder="Password" id="" name="" type="password">
                         <button class="w-full h-12 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Sign in</button>
-                        <a class="text-blue-500 hover:text-blue-800 text-sm" href="#">Forgot Password?</a>
+                        <a class="text-blue-500 hover:text-blue-800 text-sm" href="#">Lupa Password?</a>
                     </form>
                     <!-- Tombol masuk dengan Google -->
                     <div class="mt-5">
