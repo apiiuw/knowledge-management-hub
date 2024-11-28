@@ -8,7 +8,7 @@
         <div class="relative h-screen overflow-hidden rounded-lg md:h-96">
             <!-- Item 1 -->
             <div>
-                <img src="{{ asset('assets/images/pages/beranda/BerandaPresentEdu1.png') }}" class="absolute z-10 block w-full h-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                <img src="{{ asset('assets/images/pages/beranda/BerandaPresentKno1.png') }}" class="absolute z-10 block w-full h-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
             </div>
         </div>
     </div>

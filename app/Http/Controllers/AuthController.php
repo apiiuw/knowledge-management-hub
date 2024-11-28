@@ -10,51 +10,60 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    // Define admin emails
     private $adminEmails = [
         'rafirizqallahandilla@gmail.com',
-        'anotheradmin@example.com' // Replace with the second admin email
+        'urayfaisal@gmail.com',
+        'urayfaisal.hafiz@jasaraharja.co.id',
     ];
 
-    // Method to redirect user to Google login
     public function redirectToGoogle()
     {
         return Socialite::driver('google')->redirect();
     }
 
-    // Handle callback from Google
     public function handleGoogleCallback()
     {
-        $user = Socialite::driver('google')->user();
-
-        // Check if the user's email is one of the admins
-        $isAdmin = in_array($user->getEmail(), $this->adminEmails);
-
-        // Retrieve or create user in database
-        $authUser = User::firstOrCreate(
-            ['email' => $user->getEmail()],
-            [
-                'name' => $user->getName(),
-                'password' => Hash::make(uniqid()), // Random password
-                'profile_picture' => $user->getAvatar(), // Save profile picture URL
-                'is_admin' => $isAdmin
-            ]
-        );
-
-        Auth::login($authUser);
-
-        // Redirect based on role
-        if ($isAdmin) {
-            return redirect()->route('admin.pages.dashboard');
-        } else {
-            return redirect()->route('beranda');
+        try {
+            $user = Socialite::driver('google')->user();
+    
+            // Debug log to ensure correct email
+            \Log::info('Google user email: ' . $user->getEmail());
+    
+            // Check if user email is valid (admin or @jasaraharja.co.id)
+            $emailDomain = substr(strrchr($user->getEmail(), "@"), 1);
+            $isAdmin = in_array($user->getEmail(), $this->adminEmails);
+    
+            if (!$isAdmin && $emailDomain !== 'jasaraharja.co.id') {
+                return redirect()->route('masuk.login')->with('error', 'Hanya email dengan domain @jasaraharja.co.id yang diperbolehkan masuk.');
+            }
+    
+            // Update or create user in database
+            $authUser = User::updateOrCreate(
+                ['email' => $user->getEmail()],
+                [
+                    'name' => $user->getName(),
+                    'password' => Hash::make(uniqid()), // Random password
+                    // Hilangkan pengisian kolom profile_picture
+                    'is_admin' => $isAdmin
+                ]
+            );
+    
+            // Log user in
+            Auth::login($authUser);
+    
+            // Redirect user based on role
+            return $isAdmin
+                ? redirect()->route('admin.pages.dashboard')
+                : redirect()->route('beranda');
+        } catch (\Exception $e) {
+            \Log::error('Google Login Error: ' . $e->getMessage());
+            return redirect()->route('masuk.login')->with('error', 'Terjadi kesalahan saat masuk, silahkan coba lagi.');
         }
-    }
+    }    
 
-    // Logout method
     public function logout(Request $request)
     {
         Auth::logout();
-        return redirect('/masuk'); // Redirect to login page after logout
+        return redirect('/masuk');
     }
 }

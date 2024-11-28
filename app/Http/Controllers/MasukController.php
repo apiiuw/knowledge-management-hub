@@ -18,35 +18,43 @@ class MasukController extends Controller
 
     public function login(Request $request)
     {
-        // Validate form inputs
+        // Validasi input form
         $request->validate([
             'email' => 'required|email',
             'password' => 'required|min:6',
         ]);
-
-        // Check credentials
+    
+        // List admin emails yang diperbolehkan
+        $adminEmails = [
+            'rafirizqallahandilla@gmail.com',
+            'urayfaisal@gmail.com',
+            'urayfaisal.hafiz@jasaraharja.co.id'
+        ];
+    
+        // Ambil domain dari email
+        $emailDomain = substr(strrchr($request->email, "@"), 1);
+    
+        // Periksa apakah email admin atau domain @jasaraharja.co.id
+        if (!in_array($request->email, $adminEmails) && $emailDomain !== 'jasaraharja.co.id') {
+            return back()->with('error', 'Hanya email dengan domain @jasaraharja.co.id yang diperbolehkan masuk.');
+        }
+    
+        // Periksa kredensial
         $user = User::where('email', $request->email)->first();
-
+    
         if ($user && Hash::check($request->password, $user->password)) {
-            // Log the user in
+            // Login user
             Auth::login($user);
-
-            // Check if the user has one of the admin emails
-            $adminEmails = ['rafirizqallahandilla@gmail.com', 'example@gmail.com'];
-
-            if (in_array($request->email, $adminEmails)) {
-                // Redirect to the admin dashboard if email is in the list
-                return redirect()->route('admin.pages.dashboard');
-            } elseif ($user->is_admin) {
-                // Otherwise, check if the user is an admin and redirect accordingly
-                return redirect()->route('admin.pages.dashboard');
+    
+            // Redirect sesuai role atau email admin
+            if (in_array($user->email, $adminEmails) || $user->is_admin) {
+                return redirect()->route('admin-dashboard');
             } else {
-                // Redirect to the user homepage if not an admin
                 return redirect()->route('beranda');
             }
         }
-
-        // If credentials don't match, return error message
-        return back()->with('error', 'Invalid credentials. Please try again.');
-    }
+    
+        // Jika kredensial tidak cocok
+        return back()->with('error', 'Email atau password salah.');
+    }    
 }

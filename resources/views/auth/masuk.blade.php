@@ -33,15 +33,50 @@
         @vite('resources/css/app.css')
     </head>
     <body class="font-sans antialiased flex justify-center items-center bg-white h-screen">
+        @if (session('success'))
+        <div id="success-alert" 
+             class="fixed top-4 left-1/2 transform -translate-x-1/2 p-4 bg-green-500 text-white rounded-lg shadow-lg flex items-center justify-between w-11/12 md:w-1/2 lg:w-1/3 z-50">
+            <span>{{ session('success') }}</span>
+            <button id="close-alert" class="ml-4 text-xl font-bold text-white hover:text-gray-200">
+                ×
+            </button>
+        </div>
+        <script>
+            // Close the alert when the X button is clicked
+            document.getElementById('close-alert').addEventListener('click', function () {
+                document.getElementById('success-alert').classList.add('opacity-0', 'pointer-events-none');
+            });
+
+            // Automatically close the alert after 5 seconds
+            setTimeout(function () {
+                document.getElementById('success-alert').classList.add('opacity-0', 'pointer-events-none');
+            }, 5000);
+        </script>
+        @endif
+        @if (session('error'))
+        <div id="error-alert" 
+             class="fixed top-4 left-1/2 transform -translate-x-1/2 p-4 bg-red-500 text-white rounded-lg shadow-lg flex items-center justify-between w-11/12 md:w-1/2 lg:w-1/3 z-50">
+            <span>{{ session('error') }}</span>
+            <button id="close-alert" class="ml-4 text-xl font-bold text-white hover:text-gray-200">
+                ×
+            </button>
+        </div>
+        <script>
+            // Close the alert when the X button is clicked
+            document.getElementById('close-alert').addEventListener('click', function () {
+                document.getElementById('error-alert').classList.add('opacity-0', 'pointer-events-none');
+            });
+
+            // Automatically close the alert after 5 seconds
+            setTimeout(function () {
+                document.getElementById('error-alert').classList.add('opacity-0', 'pointer-events-none');
+            }, 5000);
+        </script>
+        @endif
 
         <div class="h-96 flex items-center justify-center bg-white">
             <div class="relative">
                 <div class="absolute -top-2 -left-2 -right-2 -bottom-2 rounded-lg bg-gradient-to-r bg-blueJR shadow-lg animate-pulse"></div>
-                @if(session('error'))
-                    <div class="alert alert-danger">
-                        {{ session('error') }}
-                    </div>
-                @endif
                 <div id="form-container" class="bg-white p-16 rounded-lg shadow-2xl w-80 md:w-full relative z-10 transform transition duration-500 ease-in-out">
                     <h2 id="form-title" class="text-center text-3xl font-bold mb-10 text-gray-800">Masuk</h2>
                     <form method="POST" action="{{ route('masuk.login') }}" class="space-y-5">

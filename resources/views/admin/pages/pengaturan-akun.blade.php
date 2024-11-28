@@ -7,22 +7,45 @@
       <h2 class="text-2xl font-bold">Pengaturan Akun</h2>
    
       @if(session('success'))
-          <div class="bg-green-500 text-white p-2 mt-4 rounded text-center">
+          <div id="success-message" class="bg-green-500 text-white p-2 mt-4 rounded text-center">
               {{ session('success') }}
           </div>
       @endif
    
       @if($errors->any())
-          <div class="bg-red-500 text-white p-2 mt-4 rounded text-center">
+          <div id="error-message" class="bg-red-500 text-white p-2 mt-4 rounded text-center">
               @foreach($errors->all() as $error)
                   <p>{{ $error }}</p>
               @endforeach
           </div>
       @endif
+
+        <script>
+            // Menghilangkan pesan sukses setelah 3 detik
+            setTimeout(() => {
+                const successMessage = document.getElementById('success-message');
+                if (successMessage) {
+                    successMessage.style.transition = "opacity 0.5s ease"; // Animasi transisi
+                    successMessage.style.opacity = "0"; // Menghilangkan secara visual
+                    setTimeout(() => successMessage.remove(), 500); // Hapus elemen dari DOM setelah transisi
+                }
+            }, 3000);
+        
+            // Menghilangkan pesan error setelah 3 detik
+            setTimeout(() => {
+                const errorMessage = document.getElementById('error-message');
+                if (errorMessage) {
+                    errorMessage.style.transition = "opacity 0.5s ease"; // Animasi transisi
+                    errorMessage.style.opacity = "0"; // Menghilangkan secara visual
+                    setTimeout(() => errorMessage.remove(), 500); // Hapus elemen dari DOM setelah transisi
+                }
+            }, 3000);
+        </script>
+    
    
       <!-- Menampilkan data pengguna -->
       <div class="mt-6 text-center">
-          <img src="{{ Storage::url($user->profile_picture ?? 'assets/images/profile/Default User.png') }}" alt="Profile Picture" class="w-32 h-32 rounded-full mx-auto">
+          <img src="{{ Storage::url($user->profile_picture ?? 'assets/images/profile/Default User.png') }}" alt="Profile Picture" class="w-32 h-32 rounded-full mx-auto object-cover">
           <p class="text-lg mt-2">{{ $user->name }}</p>
           <p class="text-sm text-gray-500">{{ $user->email }}</p>
       </div>
@@ -56,11 +79,12 @@
                <input type="email" name="email" id="email" value="{{ old('email', $user->email) }}" 
                       class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" 
                       readonly>
-           </div>           
+            </div>           
 
             <div class="mt-4">
                 <label for="profile_picture" class="block text-sm font-medium text-gray-700">Foto Profil</label>
-                <input type="file" name="profile_picture" id="profile_picture" class="mt-1 block w-full text-sm text-gray-500">
+                <input type="file" accept=".jpg,.jpeg,.png" name="profile_picture" id="profile_picture" class="mt-1 block w-full text-sm text-gray-500">
+                <img id="profile_picture_preview" class="mt-4 w-32 h-32 rounded-full object-cover hidden" alt="Foto Profil Preview">
             </div>
 
             <div class="mt-6">
@@ -122,6 +146,28 @@
     // Menutup modal Ganti Password
     closeChangePasswordModal.addEventListener('click', function() {
         changePasswordModal.classList.add('hidden');
+    });
+
+    document.getElementById('profile_picture').addEventListener('change', function(event) {
+        const fileInput = event.target;
+        const previewImage = document.getElementById('profile_picture_preview');
+        const file = fileInput.files[0];
+
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                previewImage.src = e.target.result;
+                previewImage.classList.remove('hidden');
+            }
+            reader.readAsDataURL(file);
+        } else {
+            previewImage.src = '';
+            previewImage.classList.add('hidden');
+        }
+    });
+
+    document.getElementById('closeUpdateProfileModal').addEventListener('click', function() {
+        document.getElementById('updateProfileModal').classList.add('hidden');
     });
 </script>
 

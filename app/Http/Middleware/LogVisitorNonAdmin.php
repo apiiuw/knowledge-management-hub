@@ -12,8 +12,8 @@ class LogVisitorNonAdmin
     {
         // Mencatat pengunjung pada setiap request
         Visitor::create([
-            'ip_address' => $request->ip(),   // Simpan IP pengunjung
-            'visit_date' => now(),             // Simpan waktu pengunjung
+            'ip_address' => $request->ip(),   
+            'visit_date' => now(),            
         ]);
 
         return $next($request);

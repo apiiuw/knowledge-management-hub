@@ -27,6 +27,40 @@
             </iframe>
         </div>
     </div>
+
+    <!-- Social Media Iframes -->
+    <div class="my-10">
+        <h2 class="text-xl md:text-2xl font-semibold text-blueJR font-jakartaSans mb-4 flex justify-center">Ikuti Kami di Media Sosial Kami</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Instagram -->
+            <div class="flex justify-center transition duration-300 ease-in-out hover:scale-105">
+                <a href="https://instagram.com/jasaraharja_jakarta/" target="blank" class="mockup-browser bg-base-300 border">
+                    <div class="mockup-browser-toolbar">
+                      <div class="input">https://instagram.com/jasaraharja_jakarta/</div>
+                    </div>
+                    <img src="{{ asset('assets/images/pages/kontak/instagram.png') }}" alt="">
+                  </a>            
+            </div>
+            <!-- Website -->
+            <div class="flex justify-center transition duration-300 ease-in-out hover:scale-105">
+                <a href="https://jasaraharja.co.id/" target="blank" class="mockup-browser bg-base-300 border">
+                    <div class="mockup-browser-toolbar">
+                      <div class="input">https://jasaraharja.co.id/</div>
+                    </div>
+                    <img src="{{ asset('assets/images/pages/kontak/website.png') }}" alt="">
+                  </a>           
+            </div>
+            <!-- YouTube -->
+            <div class="flex justify-center transition duration-300 ease-in-out hover:scale-105">
+                <a href="https://youtube.com/@OfficialJasaRaharja" target="blank" class="mockup-browser bg-base-300 border">
+                    <div class="mockup-browser-toolbar">
+                      <div class="input">https://youtube.com/@OfficialJasaRaharja</div>
+                    </div>
+                    <img src="{{ asset('assets/images/pages/kontak/youtube.png') }}" alt="">
+                  </a>
+            </div>
+        </div>
+    </div>
 </div>
 
 @endsection

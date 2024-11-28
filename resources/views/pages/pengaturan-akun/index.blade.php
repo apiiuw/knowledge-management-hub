@@ -21,7 +21,7 @@
    
       <!-- Menampilkan data pengguna -->
       <div class="mt-6 text-center">
-          <img src="{{ $user->profile_picture ? Storage::url($user->profile_picture) : asset('assets/images/profile/Default User.png') }}" alt="Profile Picture" class="w-32 h-32 rounded-full mx-auto">
+          <img src="{{ $user->profile_picture ? Storage::url($user->profile_picture) : asset('assets/images/profile/Default User.png') }}" alt="Profile Picture" class="w-32 h-32 rounded-full mx-auto object-cover">
           <p class="text-lg mt-2">{{ $user->name }}</p>
           <p class="text-sm text-gray-500">{{ $user->email }}</p>
       </div>

@@ -15,6 +15,7 @@ export default {
           jakartaSans: ['"Plus Jakarta Sans"', 'sans-serif'],
           newSosis: ['"New Sosis"', 'sans-serif'],
           comicComoc: ['"Comiccomoc"', 'sans-serif'],
+          rolves: ['"Rolves Free"', 'sans-serif'],
         },
       },
     },

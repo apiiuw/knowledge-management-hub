@@ -8,17 +8,22 @@
         <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
             <!-- Item 1 -->
             <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                <img src="{{ asset('assets/images/pages/beranda/BerandaPresentEdu1.png') }}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                <img src="{{ asset('assets/images/pages/beranda/BerandaPresentKno1.png') }}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
             </div>
             <!-- Item 2 -->
             <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                <img src="{{ asset('assets/images/pages/beranda/BerandaPresentEdu2.png') }}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                <img src="{{ asset('assets/images/pages/beranda/BerandaPresentKno2.png') }}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+            </div>
+            <!-- Item 3 -->
+            <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                <img src="{{ asset('assets/images/pages/beranda/BerandaPresentKno3.png') }}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
             </div>
         </div>
         <!-- Slider indicators -->
         <div class="absolute z-30 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3 rtl:space-x-reverse">
             <button type="button" class="w-3 h-3 rounded-full" aria-current="true" aria-label="Slide 1" data-carousel-slide-to="0"></button>
             <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 2" data-carousel-slide-to="1"></button>
+            <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 3" data-carousel-slide-to="2"></button>
         </div>
         <!-- Slider controls -->
         <button type="button" class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
@@ -127,10 +132,10 @@
     <div class="bg-white absolute z-30 left-1/2 -translate-x-1/2 -mt-16 lg:-mt-12 flex flex-col justify-center items-center shadow-lg shadow-black/20 rounded-lg p-4 pt-3 pb-6 w-4/5">
         <img class=" w-28 lg:w-56" src="{{ asset('assets/images/logo/Jasa Raharja Logo Member of IFG.png') }}" alt="">
         <p class="text-md lg:text-3xl flex flex-col font-jakartaSans font-bold text-black text-center mt-3">
-            Platform Digital Keselamatan Lalu Lintas
+            Platform Digital Edukasi Internal
         </p>
-        <button type="button" class="oauthButton text-white bg-blueJR text-3xl mt-3">
-            EduLaluLintas.com
+        <button type="button" class="oauthButton text-white bg-blueJR text-3xl font-rolves   mt-3">
+            Knowledge Management Hub
         </button>
     </div>
 

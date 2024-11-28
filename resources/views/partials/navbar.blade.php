@@ -3,12 +3,15 @@
     <div class="w-full mx-auto flex flex-wrap items-center justify-between p-4">
         <a href="/" class="flex items-center space-x-3 rtl:space-x-reverse">
             <img src="{{ asset('assets/images/logo/Jasa Raharja Logo Member of IFG.png') }}" class="h-20 -my-3" alt="Logo Jasa Raharja" />
-            <span class="hidden md:block self-center text-xl font-comicComoc md:text-3xl whitespace-nowrap ml-2 text-blueJR"><span class="text-red-500">E</span>du<span class="text-green-500">L</span>alu<span class="text-yellow-500">L</span>intas.com</span>
+            <span class="hidden md:block self-center text-xl font-rolves font-bold md:text-2xl whitespace-nowrap ml-2 text-blueJR">Knowledge Management Hub
         </a>
         <div class="flex items-center md:order-2 space-x-3">
             <button type="button" class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
                 <span class="sr-only">Open user menu</span>
-                <img class="w-10 md:w-12 h-10 md:h-12 rounded-full" src="{{ $user->profile_picture ? Storage::url($user->profile_picture) : asset('assets/images/profile/Default User.png') }}" alt="user photo">
+                <img 
+                class="w-10 md:w-12 h-10 md:h-12 rounded-full object-cover" 
+                src="{{ Auth::check() && $user->profile_picture ? Storage::url($user->profile_picture) : asset('assets/images/profile/Default User.png') }}" 
+                alt="user photo">
             </button>
             <!-- Dropdown menu -->
             <div class="hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow" id="user-dropdown">
@@ -18,7 +21,7 @@
                         <span class="block text-sm text-gray-500 truncate">{{ Auth::user()->email }}</span> <!-- Menampilkan email pengguna -->
                     </div>
                     <ul class="py-2" aria-labelledby="user-menu-button">
-                        @if(Auth::user()->email === 'rafirizqallahandilla@gmail.com') <!-- Mengecek jika admin yang login -->
+                        @if(in_array(Auth::user()->email, ['rafirizqallahandilla@gmail.com', 'urayfaisal@gmail.com', 'urayfaisal.hafiz@jasaraharja.co.id'])) 
                             <li><a href="{{ route('admin.pages.dashboard') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Dashboard Admin</a></li> <!-- Menu Dashboard Admin -->
                         @endif
                         <li><a href="{{ route('pengaturan-akun') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Pengaturan Akun</a></li>
@@ -48,6 +51,9 @@
             <ul class="flex flex-col font-medium text-lg p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white font-jakartaSans">
                 <li>
                     <a href="/" class="block py-2 px-3 {{ $active === 'beranda' ? 'text-white bg-blueJR rounded md:bg-transparent md:text-blueJR' : 'text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blueJR' }}" aria-current="page">BERANDA</a>
+                </li>
+                <li>
+                    <a href="/kompetensi" class="block py-2 px-3 {{ $active === 'kompetensi' ? 'text-white bg-blueJR rounded md:bg-transparent md:text-blueJR' : 'text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blueJR' }}">KOMPETENSI</a>
                 </li>
                 <li>
                     <a href="/tentang-kami" class="block py-2 px-3 {{ $active === 'tentang-kami' ? 'text-white bg-blueJR rounded md:bg-transparent md:text-blueJR' : 'text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blueJR' }}">TENTANG KAMI</a>

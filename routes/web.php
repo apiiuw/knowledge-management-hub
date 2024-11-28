@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BerandaController;
+use App\Http\Controllers\KompetensiController;
 use App\Http\Controllers\TentangKamiController;
 use App\Http\Controllers\ForumDiskusiController;
 use App\Http\Controllers\KontakController;
@@ -9,6 +10,7 @@ use App\Http\Controllers\DetailBukuController;
 use App\Http\Controllers\PengaturanAkunController;
 use App\Http\Controllers\MasukController;
 use App\Http\Controllers\BuatAkunController;
+use App\Http\Controllers\EmailVerificationController;
 use App\Http\Controllers\AuthController;
 use Laravel\Socialite\Facades\Socialite;
 use App\Http\Middleware\AdminMiddleware;
@@ -52,17 +54,22 @@ Route::post('masuk', [MasukController::class, 'login'])->name('masuk.login');
 // Rute halaman buat akun
 Route::get('/buat-akun', [BuatAkunController::class, 'index'])->name('register');
 Route::post('register', [BuatAkunController::class, 'store'])->name('register.store');
+Route::post('/verify-email', [EmailVerificationController::class, 'verifyEmail'])->name('verify.email');
 
 // Rute dengan middleware LogVisitorNonAdmin untuk pencatatan pengunjung di halaman umum
 Route::middleware(['auth', LogVisitorNonAdmin::class])->group(function () {
-    Route::get('/', [BerandaController::class, 'index'])->name('beranda');
-    Route::get('/tentang-kami', [TentangKamiController::class, 'index'])->name('tentang-kami');
-    Route::get('/forum-diskusi', [ForumDiskusiController::class, 'index'])->name('forum-diskusi');
     Route::get('/tanya-admin', [ForumDiskusiController::class, 'add'])->name('forum-diskusi-tanya');
     Route::post('/forum-diskusi', [ForumDiskusiController::class, 'store'])->name('forum-diskusi.store');
-    Route::get('/kontak', [KontakController::class, 'index'])->name('kontak');
     Route::get('/detail-buku/{id}', [DetailBukuController::class, 'index'])->name('detail-buku');
     Route::get('/pengaturan-akun', [PengaturanAkunController::class, 'index'])->name('pengaturan-akun');
     Route::post('pengaturan-akun/update', [PengaturanAkunController::class, 'update'])->name('pengaturan-akun.update');
     Route::patch('pengaturan-akun/password', [PengaturanAkunController::class, 'changePassword'])->name('pengaturan-akun.changePassword');
 });
+
+// Rute Non Login
+Route::get('/', [BerandaController::class, 'index'])->name('beranda');
+Route::get('/kompetensi', [KompetensiController::class, 'index'])->name('kompetensi');
+Route::get('/tentang-kami', [TentangKamiController::class, 'index'])->name('tentang-kami');
+Route::get('/forum-diskusi', [ForumDiskusiController::class, 'index'])->name('forum-diskusi');
+Route::get('/kontak', [KontakController::class, 'index'])->name('kontak');
+

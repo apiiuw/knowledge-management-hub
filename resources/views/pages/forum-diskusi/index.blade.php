@@ -7,7 +7,7 @@
     
     {{-- Head --}}
     <h1 class="font-bold text-2xl md:text-3xl text-blueJR font-jakartaSans mb-3">FORUM DISKUSI</h1>
-    <h1 class="text-center font-semibold text-md md:text-xl text-white rounded-md font-jakartaSans mb-3 py-2 px-1 bg-blueJR">Forum Diskusi dirangkai agar pengguna dapat mengekspresikan dan menanyakan suatu hal tentang platform EduLaluLintas.com. Perkembangan platform sangat bergantung kepada pertanyaan dari pengguna yang menggunakan website EduLaluLintas.com.</h1>
+    <h1 class="text-center font-semibold text-md md:text-xl text-white rounded-md font-jakartaSans mb-3 py-2 px-1 bg-blueJR">Forum Diskusi dirangkai agar pengguna dapat mengekspresikan dan menanyakan suatu hal tentang platform knowledgemanagementhub.com. Perkembangan platform sangat bergantung kepada pertanyaan dari pengguna yang menggunakan website knowledgemanagementhub.com.</h1>
 
     {{-- Search --}}
     <form method="GET" action="{{ route('forum-diskusi') }}" class="w-full mx-auto mb-3">

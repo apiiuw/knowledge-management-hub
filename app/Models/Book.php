@@ -18,5 +18,6 @@ class Book extends Model
         'keywords',
         'download_link',
         'pdf_file',
+        'softskill', // Tambahkan softskill
     ];
 }

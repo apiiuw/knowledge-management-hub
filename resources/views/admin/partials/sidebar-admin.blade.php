@@ -11,7 +11,6 @@
        </button>
       <a href="/admin-dashboard" class="flex ms-2 md:me-24">
         <img src="{{ asset('assets/images/logo/Jasa Raharja Logo Member of IFG.png') }}" class="h-20 -my-3" alt="Logo Jasa Raharja" />
-        <span class="hidden md:block self-center text-xl font-comicComoc md:text-3xl whitespace-nowrap ml-2 text-blueJR"><span class="text-red-500">E</span>du<span class="text-green-500">L</span>alu<span class="text-yellow-500">L</span>intas.com</span>
       </a>
     </div>
     <div class="flex items-center">
@@ -19,7 +18,7 @@
           <div>
               <button type="button" class="flex text-sm bg-white rounded-full focus:ring-4 focus:ring-gray-300" aria-expanded="false" data-dropdown-toggle="dropdown-user">
                   <span class="sr-only">Open user menu</span>
-                  <img class="w-10 md:w-12 h-10 md:h-12 rounded-full" src="{{ Storage::url($user->profile_picture ?? 'assets/images/profile/Default User.png') }}" alt="user photo">
+                  <img class="w-10 md:w-12 h-10 md:h-12 rounded-full object-cover" src="{{ Auth::check() && $user->profile_picture ? Storage::url($user->profile_picture) : asset('assets/images/profile/Default User.png') }}" alt="user photo">
               </button>
           </div>
           <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow" id="dropdown-user">

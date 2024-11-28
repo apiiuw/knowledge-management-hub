@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ isset($title) ? $title . 'EduLaluLintas' : 'EduLaluLintas' }}</title>
+        <title>{{ isset($title) ? $title . 'Knowledge Management Hub' : 'Knowledge Management Hub' }}</title>
         <link rel="icon" href="{{ asset('assets/images/logo/Jasa Raharja Logo Utama.png') }}">
 
         {{-- CDN --}}
@@ -16,6 +16,7 @@
         <link href="https://fonts.cdnfonts.com/css/neck-l-sans" rel="stylesheet">
         <link href="https://fonts.cdnfonts.com/css/new-sosis" rel="stylesheet">
         <link href="https://fonts.cdnfonts.com/css/comiccomoc" rel="stylesheet">
+        <link href="https://fonts.cdnfonts.com/css/rolves-free" rel="stylesheet">
         
         {{-- ICON --}}
         <script src="https://kit.fontawesome.com/d7833bfda5.js" crossorigin="anonymous"></script>

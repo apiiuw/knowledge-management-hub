@@ -33,7 +33,30 @@
         @vite('resources/css/app.css')
     </head>
     <body class="font-sans antialiased flex justify-center items-center bg-white h-screen">
-
+        @if ($errors->any())
+        <div id="error-alert" 
+             class="fixed top-4 left-1/2 transform -translate-x-1/2 p-4 bg-red-500 text-white rounded-lg shadow-lg flex items-center justify-between w-11/12 md:w-1/2 lg:w-1/3 z-50">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+            <button id="close-alert" class="ml-4 text-xl font-bold text-white hover:text-gray-200">
+                ×
+            </button>
+        </div>
+        <script>
+            // Close the alert when the X button is clicked
+            document.getElementById('close-alert').addEventListener('click', function () {
+                document.getElementById('error-alert').classList.add('opacity-0', 'pointer-events-none');
+            });
+    
+            // Automatically close the alert after 5 seconds
+            setTimeout(function () {
+                document.getElementById('error-alert').classList.add('opacity-0', 'pointer-events-none');
+            }, 5000);
+        </script>
+        @endif
         <div class="h-96 flex items-center justify-center bg-white">
             <div class="relative">
                 <div class="absolute -top-2 -left-2 -right-2 -bottom-2 rounded-lg bg-gradient-to-r bg-blueJR shadow-lg animate-pulse"></div>
@@ -48,26 +71,67 @@
                         @csrf <!-- CSRF Protection -->
 
                         <div>
-                            <label for="name">Nama
-                                <input class="w-full h-12 border border-gray-800 px-3 rounded-lg" placeholder="Nama Lengkap" name="name" type="text" required>
+                            <label class="text-black" for="name">Nama
+                                <input class="w-full h-12 text-black border border-gray-800 px-3 rounded-lg" placeholder="Nama Lengkap" name="name" type="text" required>
                             </label>
                         </div>
                         
                         <div>
-                            <label for="email">Email
-                                <input class="w-full h-12 border border-gray-800 px-3 rounded-lg" placeholder="Email" name="email" type="email" required>
-                            </label>
+                            <label class="text-black" for="email">Email</label>
+                            <input 
+                                class="w-full h-12 border text-black border-gray-800 px-3 rounded-lg" 
+                                placeholder="Email" 
+                                id="email" 
+                                name="email" 
+                                type="email" 
+                                required>
+                            <span id="email-feedback" class="text-red-500"></span>
                         </div>
+                        
+                        <script>
+                            document.getElementById('email').addEventListener('input', function () {
+                                const email = this.value;
+                                const feedback = document.getElementById('email-feedback');
+                        
+                                // Cek jika email belum lengkap
+                                if (!email.includes('@')) {
+                                    feedback.textContent = '';
+                                    return;
+                                }
+                        
+                                // Kirim permintaan AJAX ke backend
+                                fetch('/verify-email', {
+                                    method: 'POST',
+                                    headers: {
+                                        'Content-Type': 'application/json',
+                                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                                    },
+                                    body: JSON.stringify({ email })
+                                })
+                                .then(response => response.json())
+                                .then(data => {
+                                    if (data.valid) {
+                                        feedback.textContent = ''; // Email valid
+                                    } else {
+                                        feedback.textContent = data.message; // Tampilkan pesan error
+                                    }
+                                })
+                                .catch(err => {
+                                    feedback.textContent = 'Terjadi kesalahan saat memverifikasi email.';
+                                    console.error(err);
+                                });
+                            });
+                        </script>                        
 
                         <div>
-                            <label class="mt-3" for="password">Password
-                                <input class="w-full h-12 border border-gray-800 px-3 rounded-lg" placeholder="Password" name="password" type="password" required>
+                            <label class="mt-3 text-black" for="password">Password
+                                <input class="w-full h-12 border text-black border-gray-800 px-3 rounded-lg" placeholder="Password" name="password" type="password" required>
                             </label>
                         </div>
                         
                         <div>
-                            <label class="mt-3" for="password_confirmation">Konfirmasi Password
-                                <input class="w-full h-12 border border-gray-800 px-3 rounded-lg" placeholder="Konfirmasi Password" name="password_confirmation" type="password" required>
+                            <label class="mt-3 text-black" for="password_confirmation">Konfirmasi Password
+                                <input class="w-full h-12 text-black border border-gray-800 px-3 rounded-lg" placeholder="Konfirmasi Password" name="password_confirmation" type="password" required>
                             </label>
                         </div>
                         

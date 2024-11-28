@@ -18,9 +18,14 @@ class AdminMiddleware
     public function handle(Request $request, Closure $next)
     {
         // Cek apakah pengguna yang sedang login memiliki email tertentu (akses admin)
-        if (Auth::check() && Auth::user()->email === 'rafirizqallahandilla@gmail.com') {
+        if (Auth::check() && in_array(Auth::user()->email, [
+            'rafirizqallahandilla@gmail.com',
+            'urayfaisal@gmail.com',
+            'urayfaisal.hafiz@jasaraharja.co.id',
+        ])) {
             return $next($request);
         }
+        
 
         // Jika bukan admin, redirect ke halaman lain
         return redirect('/')->with('error', 'Anda tidak memiliki akses ke halaman ini.');
