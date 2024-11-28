@@ -65,6 +65,7 @@
                             <p class="text-sm font-semibold lg:text-base text-black">Tipe Dokumen: {{ $book->type }}</p>
                             <p class="mb-1 text-sm font-semibold lg:text-base text-black">Tahun Rilis: {{ $book->release_year }}</p>
                             <p class="mb-3 text-sm lg:text-base text-gray-700 line-clamp-3 flex-grow">{{ $book->description }}</p>
+                            <p class="mb-1 text-sm font-semibold lg:text-base text-black">Softskill: {{ $book->softskill }}</p>
                             
                             <div class="flex flex-col justify-center mt-auto gap-y-2">
 

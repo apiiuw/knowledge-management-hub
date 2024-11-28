@@ -8,7 +8,7 @@
             <header class="bg-white px-6 dark:bg-gray-900">
                 <div class="container flex flex-col justify-center px-6 py-10 mx-auto space-y-6 lg:h-[32rem] lg:py-16 lg:flex-row lg:items-center">
                     <div class="w-full lg:w-1/2">
-                        <div class="lg:max-w-lg">
+                        <div>
                             <h1 class="text-3xl font-semibold tracking-wide text-gray-800 dark:text-white lg:text-4xl">Temukan softskillmu bersama<br>Knowledge Management Hub</h1>
                             <p class="mt-4 text-gray-600 dark:text-gray-300">Memperluas kemampuan anda bersama kami, ayo temukan softskill yang anda minati!</p>
 
@@ -91,7 +91,7 @@
             @foreach ($books as $softskill => $bookList)
             <div class="{{ $loop->even ? 'bg-white text-blueJR' : 'bg-blueJR text-white' }} flex flex-col justify-center px-5">
                 <h1 class="text-3xl font-bold text-center mt-3">{{ $softskill }}</h1>
-                <p class="mt-4 text-center">
+                <p class="mt-4 px-10 text-center">
                     @switch($softskill)
                         @case('Achievement Orientation')
                             Kemampuan untuk menetapkan dan mencapai target dengan penuh dedikasi. Soft skill ini menekankan fokus pada hasil, di mana seseorang terus-menerus mencari cara untuk meningkatkan kinerja, mengatasi tantangan, dan mencapai standar yang lebih tinggi dalam pekerjaan.

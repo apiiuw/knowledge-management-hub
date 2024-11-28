@@ -53,7 +53,24 @@
                     Studi Kasus
                 </label>
             </div>
-         </div>       
+         </div>    
+         
+         <div class="mt-4">
+            <label for="softskill" class="block text-sm font-medium text-gray-700">Softskill</label>
+            <select id="softskill" name="softskill" class="mt-1 p-2 border rounded w-full text-black" required>
+                <option value="">Pilih Softskill...</option>
+                <option value="Achievement Orientation" {{ $book->softskill == 'Achievement Orientation' ? 'selected' : '' }}>Achievement Orientation</option>
+                <option value="Professionalisme" {{ $book->softskill == 'Professionalisme' ? 'selected' : '' }}>Professionalisme</option>
+                <option value="Customer Service Orientation" {{ $book->softskill == 'Customer Service Orientation' ? 'selected' : '' }}>Customer Service Orientation</option>
+                <option value="Continuous Learning" {{ $book->softskill == 'Continuous Learning' ? 'selected' : '' }}>Continuous Learning</option>
+                <option value="Relationship Building" {{ $book->softskill == 'Relationship Building' ? 'selected' : '' }}>Relationship Building</option>
+                <option value="Driving Change" {{ $book->softskill == 'Driving Change' ? 'selected' : '' }}>Driving Change</option>
+                <option value="Problem Solving" {{ $book->softskill == 'Problem Solving' ? 'selected' : '' }}>Problem Solving</option>
+                <option value="Business Acumen" {{ $book->softskill == 'Business Acumen' ? 'selected' : '' }}>Business Acumen</option>
+                <option value="Digital Leadership" {{ $book->softskill == 'Digital Leadership' ? 'selected' : '' }}>Digital Leadership</option>
+                <option value="Strategic Orientation" {{ $book->softskill == 'Strategic Orientation' ? 'selected' : '' }}>Strategic Orientation</option>
+            </select>
+        </div>        
 
          <!-- Release Year input -->
          <div class="mt-4">

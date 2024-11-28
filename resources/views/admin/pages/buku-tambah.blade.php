@@ -45,6 +45,23 @@
         </div>        
 
         <div class="mt-4">
+            <label for="softskill" class="block text-sm font-medium text-gray-700">Softskill</label>
+            <select id="softskill" name="softskill" class="mt-1 p-2 border rounded w-full text-black" required>
+                <option value="">Pilih Softskill...</option>
+                <option value="Kreativitas">Achievement Orientation</option>
+                <option value="Komunikasi">Professionalisme</option>
+                <option value="Kerja Sama Tim">Customer Service Orientation</option>
+                <option value="Pemecahan Masalah">Continuous Learning</option>
+                <option value="Manajemen Waktu">Relationship Building</option>
+                <option value="Berpikir Kritis">Driving Change</option>
+                <option value="Adaptabilitas">Problem Solving</option>
+                <option value="Kepemimpinan">Business Acumen</option>
+                <option value="Etika Kerja">Digital Leadership</option>
+                <option value="Kepercayaan Diri">Strategic Orientation</option>
+            </select>
+        </div>        
+
+        <div class="mt-4">
          <label for="release_year" class="block text-sm font-medium text-gray-700">Tahun Rilis</label>
          <input 
              type="number" 

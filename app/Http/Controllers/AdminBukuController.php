@@ -53,6 +53,7 @@ class AdminBukuController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'type' => 'required|string',
+            'softskill' => 'required|string',
             'release_year' => 'required|integer|min:1900|max:' . date('Y'),
             'description' => 'required|string',
             'keywords' => 'required|string|min:3',
@@ -74,13 +75,14 @@ class AdminBukuController extends Controller
         Book::create([
             'title' => $request->title,
             'type' => $request->type,
+            'softskill' => $request->softskill, 
             'cover_image' => $coverImage,
             'release_year' => $request->release_year,
             'description' => $request->description,
-            'keywords' => $request->keywords, // Simpan langsung sebagai string
+            'keywords' => $request->keywords,
             'download_link' => $downloadLink,
             'pdf_file' => $pdfFilePath,
-        ]);
+        ]);        
     
         return redirect()->route('admin.pages.buku')->with('success', 'Buku berhasil ditambahkan.');
     }
@@ -101,6 +103,7 @@ class AdminBukuController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'type' => 'required|string',
+            'softskill' => 'required|string',
             'release_year' => 'required|integer|min:1900|max:' . date('Y'),
             'description' => 'required|string',
             'keywords' => 'nullable|string',
@@ -113,6 +116,7 @@ class AdminBukuController extends Controller
         // Update book details
         $book->title = $request->input('title');
         $book->type = $request->input('type');
+        $book->softskill = $request->input('softskill');
         $book->release_year = $request->input('release_year');
         $book->description = $request->input('description');
         $book->keywords = $request->input('keywords');
